@@ -20,8 +20,11 @@ import axios from "axios";
 import { TestCarousel } from "./pages/TestCarousel";
 import Loader from "./components/Loader";
 import sadtear from "../src/assets/sadtear.svg";
+import { Search } from "./pages/Search";
 
 function App() {
+  const [games, setGames] = useState([]);
+  const [BrowseFilter, setBrowseFilter] = useState();
 
   return (
     <>
@@ -31,10 +34,21 @@ function App() {
             <Route index element={<Home />} />
 
             <Route path="browse" element={<Navigate to="1" replace />} />
-            <Route path="browse/:pagenum" element={<Browse />} />
+            <Route
+              path="browse/:pagenum"
+              element={
+                <Browse
+                  games={games}
+                  setGames={setGames}
+                  filter={BrowseFilter}
+                  setFilter={setBrowseFilter}
+                />
+              }
+            />
 
             <Route path="overview/:gameName" element={<Overview />} />
             <Route path="news" element={<News />} />
+            <Route path="search/:gameName" element={<Search />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -174,7 +174,7 @@ export const BrowseFilter = ({
   const updateMaps = () => {
     //platform
     //id,name
-    if (filter[0] && filter[0].length > 0) {
+    if (filter && filter[0].length > 0) {
       filter[0].forEach((id) => {
         const item = developers.find((d) => d.id == id);
         setDeveloperMap((prev) => {
@@ -182,7 +182,7 @@ export const BrowseFilter = ({
         });
       });
     }
-    if (filter[1] && filter[1].length > 0) {
+    if (filter && filter[1].length > 0) {
       filter[1].forEach((id) => {
         const item = tags.find((d) => d.id == id);
         setTagMap((prev) => {
@@ -190,7 +190,7 @@ export const BrowseFilter = ({
         });
       });
     }
-    if (filter[2] && filter[2].length > 0) {
+    if (filter && filter[2].length > 0) {
       filter[2].forEach((id) => {
         const item = platforms.find((d) => d.id == id);
         setPlatformMap((prev) => {
@@ -198,7 +198,7 @@ export const BrowseFilter = ({
         });
       });
     }
-    if (filter[3] && filter[3].length > 0) {
+    if (filter && filter[3].length > 0) {
       filter[3].forEach((id) => {
         const item = genres.find((d) => d.id == id);
         setGenreMap((prev) => {
@@ -206,7 +206,7 @@ export const BrowseFilter = ({
         });
       });
     }
-    if (filter[4] && filter[4].length > 0) {
+    if (filter && filter[4].length > 0) {
       filter[4].forEach((id) => {
         const item = order.find((d) => d.id == id);
         setOrderMap((prev) => {

@@ -21,10 +21,11 @@ export const Overview = () => {
   const [gameData, setGameData] = useState(null);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
-  const { gameID, similar } = location.state;
+  const { gameID } = location.state;
   const screenshotRef = useRef();
   const screenshotCardRef = useRef();
   const [error, setError] = useState(false);
+  const [similar, setSimilar] = useState([]);
   const descRef = useRef(null);
   let descHeight;
 
@@ -33,24 +34,40 @@ export const Overview = () => {
 
   useEffect(() => {
     if (gameData && gameData.length > 0) return;
-
     if (gameID) {
       fetchData();
     }
   }, [gameID]);
-  const handleScreenShotClick = (dir) => {
-    const container = screenshotRef.current;
-    const card = screenshotCardRef.current;
-    let scrollAmount = card.offsetWidth;
 
-    if (dir == "l") {
-      container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    }
-    if (dir == "r") {
-      container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+
+  useEffect(() => {
+    fetchSimilar();
+  }, [gameData]);
+
+  const fetchSimilar = async () => {
+    if (!gameData) return;
+    
+    let genres;
+
+    genres = gameData.genres.map((item) => {
+      return item.id;
+    });
+
+    try {
+      const url =  `https://api.rawg.io/api/games?key=051442f84dc3402b885a0e52cecb4272&genres=${genres.join()}`
+      console.log("fetching similar from",url )
+      const res = await axios.get(
+        url
+       
+      );
+      setSimilar(res.data.results);
+      console.log("similar:", res.data);
+      
+    } catch (err) {
+      setError(err);
+      console.error("Error fetching game data:", err);
     }
   };
-
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -60,8 +77,8 @@ export const Overview = () => {
 
       setGameData(res.data);
 
-      console.log(res.data);
-      setLoading(false);
+      
+      
     } catch (err) {
       setError(err);
       console.error("Error fetching game data:", err);
@@ -177,23 +194,6 @@ export const Overview = () => {
             );
           })}
         </div>
-
-        {/* <div className="absolute w-full flex justify-between top-1/2 px-4">
-          <FontAwesomeIcon
-            className="bg-zinc-900/80 rounded-md p-0.5"
-            icon={faCaretLeft}
-            onClick={() => {
-              handleScreenShotClick("l");
-            }}
-          />
-          <FontAwesomeIcon
-            className="bg-zinc-900/80 rounded-md p-0.5"
-            icon={faCaretRight}
-            onClick={() => {
-              handleScreenShotClick("r");
-            }}
-          />
-        </div> */}
       </div>
 
       {/*      --------------------Genres---------------------         */}
@@ -220,7 +220,9 @@ export const Overview = () => {
       <div className="flex px-3 gap-5">
         <div className="flex flex-col gap-0  justify-between">
           <p className="text-4xl font-medium">{gameData.rating}</p>
-          <p className="text-xs my-1"><StarRating value={gameData.rating}/></p>
+          <p className="text-xs my-1">
+            <StarRating value={gameData.rating} />
+          </p>
           <p className="text-xs text-zinc-700 font-medium">45670</p>
         </div>
         <div className="flex flex-1 flex-col gap-1 justify-center">
@@ -296,14 +298,9 @@ export const Overview = () => {
       <p className=" mb-3 mt-10 ml-3 font-medium ">Similar Games</p>
       <div className="px-3 overflow-auto flex flex-nowrap gap-3 [scrollbar-width:none] [-webkit-scrollbar:display:none]">
         {similar.map((gameData, index) => {
-          return <GameCard gameData={gameData} similar={similar} />;
+          return <GameCard gameData={gameData} />;
         })}
       </div>
-
-      
-
-
-
     </div>
   );
 };

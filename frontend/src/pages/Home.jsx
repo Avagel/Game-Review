@@ -22,6 +22,7 @@ export const Home = ({}) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [news, setNews] = useState();
+  
   useEffect(() => {
     if (news && news.length > 0 && games && games.length > 0) setLoading(false);
   });

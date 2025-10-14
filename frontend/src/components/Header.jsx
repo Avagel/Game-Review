@@ -1,4 +1,4 @@
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faKipSign } from "@fortawesome/free-solid-svg-icons";
 import { faCancel } from "@fortawesome/free-solid-svg-icons";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
@@ -6,35 +6,46 @@ import { faCaretLeft } from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faBurger } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import { NavBar } from "./NavBar";
 import { useEffect } from "react";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const getText = () => {
-  const location = useLocation();
-  console.log("location", location);
-  if (location.pathname.includes("browse")) return "Browse";
-
-  switch (location.pathname) {
-    case "/":
-      return "Home";
-    case "/news":
-      return "News";
-    default:
-      return "Overview";
-  }
-};
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  let text = getText();
+
   const navigate = useNavigate();
   const [isSearch, setIsSearch] = useState(false);
+  const inputRef = useRef(null);
   const handleSearch = () => {
     console.log("searching");
     setIsOpen(false);
     setIsSearch((prev) => !prev);
+  };
+  const getText = () => {
+    const location = useLocation();
+    console.log("location", location);
+    if (location.pathname.includes("browse")) return "Browse";
+
+    switch (location.pathname) {
+      case "/":
+        return "Home";
+      case "/news":
+        return "News";
+      default:
+        return "Overview";
+    }
+  };
+  let text = getText();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let searchValue = inputRef.current.value;
+    searchValue = searchValue.toLowerCase().trim();
+    if (!searchValue) return;
+
+    navigate(`/search/${searchValue}`);
   };
 
   return (
@@ -71,19 +82,21 @@ export const Header = () => {
           isSearch ? " flex items-center justify-end" : ""
         }`}
       >
-        <input
-          type="text"
-          className={` transition-all duration-300 bg-zinc-800  rounded-md cursor-pointer ${
-            isSearch ? "w-full px-3  h-9" : "w-0 none"
-          } right-0 text-xs `}
-          placeholder="Search Game"
-        />
-
-        <FontAwesomeIcon
-          icon={isSearch ? faXmark : faSearch}
-          className="text-xs"
-          onClick={handleSearch}
-        />
+        <form onSubmit={handleSubmit} className="w-full">
+          <input
+            ref={inputRef}
+            type="text"
+            className={` transition-all duration-300 bg-zinc-800  rounded-md cursor-pointer ${
+              isSearch ? "w-93/100 px-3  h-9" : "w-0 none"
+            } right-0 text-xs `}
+            placeholder="Search Game"
+          />
+          <FontAwesomeIcon
+            icon={isSearch ? faXmark : faSearch}
+            className="text-xs"
+            onClick={handleSearch}
+          />
+        </form>
       </div>
 
       {isOpen ? (

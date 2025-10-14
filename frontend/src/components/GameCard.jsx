@@ -6,6 +6,7 @@ export const GameCard = ({ gameData = [], similar }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const isBrowse = location.pathname.includes("browse");
+  const isSearch = location.pathname.includes("search");
   const isOverview = location.pathname.includes("overview");
 
   const classBrowse = `box-border rounded-md aspect-120/150 font-medium text-sm overflow-hidden px-3 flex flex-col justify-center `;
@@ -16,7 +17,7 @@ export const GameCard = ({ gameData = [], similar }) => {
 
   return (
     <div
-      className={isBrowse ? classBrowse : isOverview ? classOver : classBase}
+      className={isBrowse || isSearch ? classBrowse : isOverview ? classOver : classBase}
       onClick={() => {
         navigate("/overview/" + name, {
           state: { gameID, similar },

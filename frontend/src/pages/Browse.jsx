@@ -17,18 +17,20 @@ import { GameCardLoad } from "../components/GameCardLoad";
 import filterSvg from "../assets/filterSvg.svg";
 import { BrowseFilter } from "../components/BrowseFilter";
 
-export const Browse = () => {
+export const Browse = ({ games, setGames, filter, setFilter }) => {
   const { pagenum } = useParams();
   const navigate = useNavigate();
-  const [games, setGames] = useState([]);
+
   const [next, setNext] = useState();
   const [previous, setPrevious] = useState();
   const [loading, setLoading] = useState(true);
   const [filterMode, setFilterMode] = useState(null);
   const [isFiltered, setIsFiltered] = useState(false);
-  const [filter, setFilter] = useState([]);
   const containerRef = useRef(null);
   const dummy = [3, 3, 3, 3, 3, 3, 3];
+  useEffect(() => {
+    if (filter) setIsFiltered(true);
+  }, []);
 
   useEffect(() => {
     if (!pagenum) navigate("/browse/1", { replace: true });
@@ -82,7 +84,6 @@ export const Browse = () => {
       }
 
       setLoading(false);
-
     } catch (e) {
       console.error("Fetching games failed: ", e);
     } finally {
@@ -132,7 +133,7 @@ export const Browse = () => {
         >
           <FontAwesomeIcon
             className={
-              filter[0] && filter[0].length > 0 ? `text-orange-500` : ""
+              filter && filter[0].length > 0 ? `text-orange-500` : ""
             }
             icon={faPuzzlePiece}
           />{" "}
@@ -145,7 +146,7 @@ export const Browse = () => {
         >
           <FontAwesomeIcon
             className={
-              filter[1] && filter[1].length > 0 ? `text-orange-500` : ""
+              filter && filter[1].length > 0 ? `text-orange-500` : ""
             }
             icon={faTag}
           />
@@ -158,7 +159,7 @@ export const Browse = () => {
         >
           <FontAwesomeIcon
             className={
-              filter[2] && filter[2].length > 0 ? `text-orange-500` : ""
+              filter && filter[2].length > 0 ? `text-orange-500` : ""
             }
             icon={faGamepad}
           />
@@ -202,7 +203,7 @@ export const Browse = () => {
                     d="M14,16.5 C14.8284,16.5 15.5,17.1716 15.5,18 C15.5,18.7796706 14.9050879,19.4204457 14.1444558,19.4931332 L14,19.5 L10,19.5 C9.17157,19.5 8.5,18.8284 8.5,18 C8.5,17.2203294 9.09488554,16.5795543 9.85553954,16.5068668 L10,16.5 L14,16.5 Z M17,10.5 C17.8284,10.5 18.5,11.1716 18.5,12 C18.5,12.8284 17.8284,13.5 17,13.5 L7,13.5 C6.17157,13.5 5.5,12.8284 5.5,12 C5.5,11.1716 6.17157,10.5 7,10.5 L17,10.5 Z M20,4.5 C20.8284,4.5 21.5,5.17157 21.5,6 C21.5,6.82843 20.8284,7.5 20,7.5 L4,7.5 C3.17157,7.5 2.5,6.82843 2.5,6 C2.5,5.17157 3.17157,4.5 4,4.5 L20,4.5 Z"
                     id="形状"
                     fill={`${
-                      filter[3] && filter[3].length > 0
+                      filter && filter[3].length > 0
                         ? `#ff6900`
                         : "#ffffffff"
                     }`}
