@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config()
 const cors = require("cors");
 const { createClient } = require("redis");
 const axios = require("axios");
@@ -12,29 +13,33 @@ let isConnected = false;
 
 async function initializeRedis() {
   // If Redis URL is not provided, skip Redis initialization
-  //   if (!process.env.REDIS_URL) {
-  //     console.log("⚠️ REDIS_URL not found. Running without Redis.");
-  //     return null;
-  //   }
+  if (!process.env.REDIS_URL) {
+    console.log("⚠️ REDIS_URL not found. Running without Redis.");
+    return null;
+  }
 
   try {
     console.log("🔗 Initializing Redis connection...");
-    // console.log(
-    //   "📡 Redis URL:",
-    //   process.env.REDIS_URL.replace(/:[^:]*@/, ":****@")
-    // ); // Hide password
+    console.log(
+      "📡 Redis URL:",
+      process.env.REDIS_URL.replace(/:[^:]*@/, ":****@")
+    ); // Hide password
 
-    // // Validate Redis URL format
-    // if (
-    //   !process.env.REDIS_URL.startsWith("redis://") &&
-    //   !process.env.REDIS_URL.startsWith("rediss://")
-    // ) {
-    //   console.log("⚠️ Adding redis:// protocol prefix");
-    //   process.env.REDIS_URL = "redis://" + process.env.REDIS_URL;
-    // }
+    // Validate Redis URL format
+    if (
+      !process.env.REDIS_URL.startsWith("redis://") &&
+      !process.env.REDIS_URL.startsWith("rediss://")
+    ) {
+      console.log("⚠️ Adding redis:// protocol prefix");
+      process.env.REDIS_URL = "redis://" + process.env.REDIS_URL;
+    }
 
     redisClient = createClient({
-      url: "redis://localhost:6379",
+      url: process.env.REDIS_URL,
+      socket: {
+        connectTimeout: 60000,
+        lazyConnect: true,
+      },
     });
 
     redisClient.on("error", (err) => {
@@ -126,4 +131,4 @@ app.get("/api/games/:pagenum", async (req, res) => {
 
 initializeRedis();
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+app.listen(process.env.PORT || 3000, () => console.log("Server running on port 3000"));
