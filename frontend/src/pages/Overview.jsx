@@ -39,14 +39,13 @@ export const Overview = () => {
     }
   }, [gameID]);
 
-
   useEffect(() => {
     fetchSimilar();
   }, [gameData]);
 
   const fetchSimilar = async () => {
     if (!gameData) return;
-    
+
     let genres;
 
     genres = gameData.genres.map((item) => {
@@ -54,15 +53,11 @@ export const Overview = () => {
     });
 
     try {
-      const url =  `https://api.rawg.io/api/games?key=051442f84dc3402b885a0e52cecb4272&genres=${genres.join()}`
-      console.log("fetching similar from",url )
-      const res = await axios.get(
-        url
-       
-      );
+      const url = `https://api.rawg.io/api/games?key=051442f84dc3402b885a0e52cecb4272&genres=${genres.join()}`;
+      console.log("fetching similar from", url);
+      const res = await axios.get(url);
       setSimilar(res.data.results);
       console.log("similar:", res.data);
-      
     } catch (err) {
       setError(err);
       console.error("Error fetching game data:", err);
@@ -76,9 +71,6 @@ export const Overview = () => {
       );
 
       setGameData(res.data);
-
-      
-      
     } catch (err) {
       setError(err);
       console.error("Error fetching game data:", err);

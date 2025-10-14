@@ -1,5 +1,5 @@
 const express = require("express");
-require("dotenv").config()
+require("dotenv").config();
 const cors = require("cors");
 const { createClient } = require("redis");
 const axios = require("axios");
@@ -8,68 +8,85 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-let redisClient = null;
+// let redisClient = null;
 let isConnected = false;
 
-async function initializeRedis() {
-  // If Redis URL is not provided, skip Redis initialization
-  if (!process.env.REDIS_URL) {
-    console.log("⚠️ REDIS_URL not found. Running without Redis.");
-    return null;
-  }
+const redisClient = createClient({
+  username: "default",
+  password: "sTf7hCaCd2GtHu2ZbAlEUaYZV763X6Hh",
+  socket: {
+    host: "redis-18320.c273.us-east-1-2.ec2.redns.redis-cloud.com",
+    port: 18320,
+  },
+});
 
-  try {
-    console.log("🔗 Initializing Redis connection...");
-    console.log(
-      "📡 Redis URL:",
-      process.env.REDIS_URL.replace(/:[^:]*@/, ":****@")
-    ); // Hide password
+redisClient.on("error", (err) => console.log("Redis Client Error", err));
 
-    // Validate Redis URL format
-    if (
-      !process.env.REDIS_URL.startsWith("redis://") &&
-      !process.env.REDIS_URL.startsWith("rediss://")
-    ) {
-      console.log("⚠️ Adding redis:// protocol prefix");
-      process.env.REDIS_URL = "redis://" + process.env.REDIS_URL;
-    }
+const connectRedis = async () => {
+  await redisClient.connect();
+  console.log("redis connected successfully");
+};
+connectRedis();
 
-    redisClient = createClient({
-      url: process.env.REDIS_URL,
-      socket: {
-        connectTimeout: 60000,
-        lazyConnect: true,
-      },
-    });
+// async function initializeRedis() {
+//   // If Redis URL is not provided, skip Redis initialization
+//   if (!process.env.REDIS_URL) {
+//     console.log("⚠️ REDIS_URL not found. Running without Redis.");
+//     return null;
+//   }
 
-    redisClient.on("error", (err) => {
-      console.error("❌ Redis Client Error:", err.message);
-      isConnected = false;
-    });
+//   try {
+//     console.log("🔗 Initializing Redis connection...");
+//     console.log(
+//       "📡 Redis URL:",
+//       process.env.REDIS_URL.replace(/:[^:]*@/, ":****@")
+//     ); // Hide password
 
-    redisClient.on("connect", () => {
-      console.log("🔗 Redis Client Connecting...");
-    });
+//     // Validate Redis URL format
+//     if (
+//       !process.env.REDIS_URL.startsWith("redis://") &&
+//       !process.env.REDIS_URL.startsWith("rediss://")
+//     ) {
+//       console.log("⚠️ Adding redis:// protocol prefix");
+//       process.env.REDIS_URL = "redis://" + process.env.REDIS_URL;
+//     }
 
-    redisClient.on("ready", () => {
-      console.log("✅ Redis Client Ready");
-      isConnected = true;
-    });
+//     redisClient = createClient({
+//       url: process.env.REDIS_URL,
+//       socket: {
+//         connectTimeout: 60000,
+//         lazyConnect: true,
+//       },
+//     });
 
-    redisClient.on("end", () => {
-      console.log("🔌 Redis Client Disconnected");
-      isConnected = false;
-    });
+//     redisClient.on("error", (err) => {
+//       console.error("❌ Redis Client Error:", err.message);
+//       isConnected = false;
+//     });
 
-    await redisClient.connect();
-    console.log("🎉 Redis Client Connected Successfully");
-    return redisClient;
-  } catch (error) {
-    console.error("❌ Failed to connect to Redis:", error.message);
-    console.log("⚠️ Application will run without Redis caching");
-    return null;
-  }
-}
+//     redisClient.on("connect", () => {
+//       console.log("🔗 Redis Client Connecting...");
+//     });
+
+//     redisClient.on("ready", () => {
+//       console.log("✅ Redis Client Ready");
+//       isConnected = true;
+//     });
+
+//     redisClient.on("end", () => {
+//       console.log("🔌 Redis Client Disconnected");
+//       isConnected = false;
+//     });
+
+//     await redisClient.connect();
+//     console.log("🎉 Redis Client Connected Successfully");
+//     return redisClient;
+//   } catch (error) {
+//     console.error("❌ Failed to connect to Redis:", error.message);
+//     console.log("⚠️ Application will run without Redis caching");
+//     return null;
+//   }
+// }
 
 // Example route: cache API response
 app.get("/api/news", async (req, res) => {
@@ -129,6 +146,8 @@ app.get("/api/games/:pagenum", async (req, res) => {
   }
 });
 
-initializeRedis();
+// initializeRedis();
 
-app.listen(process.env.PORT || 3000, () => console.log("Server running on port 3000"));
+app.listen(process.env.PORT || 3000, () =>
+  console.log("Server running on port 3000")
+);
