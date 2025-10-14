@@ -1,0 +1,41 @@
+[33mcommit adc532488f16cd2d3619bebbb414f2f03abb1693[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Akanume Iruoghene <akanumeiruoghene@gmail.com>
+Date:   Tue Oct 14 20:22:13 2025 +0100
+
+    fixing redis error
+
+[33mcommit f9b94c41cfcc9783d962e8fa9dfe56c362974e7d[m
+Author: Akanume Iruoghene <akanumeiruoghene@gmail.com>
+Date:   Tue Oct 14 20:10:14 2025 +0100
+
+    added start to package json II
+
+[33mcommit 58989765db60e7a22001e2481c5695afc34bad02[m
+Author: Akanume Iruoghene <akanumeiruoghene@gmail.com>
+Date:   Tue Oct 14 15:32:40 2025 +0100
+
+    added start to package json
+
+[33mcommit 7f1c59ecfe074097743319e889283608e6c8b253[m
+Author: Akanume Iruoghene <akanumeiruoghene@gmail.com>
+Date:   Tue Oct 14 15:19:27 2025 +0100
+
+    fixed bakend redis
+
+[33mcommit 727045cc3ca581ab396ee2668469c6032c91a5f0[m
+Author: Akanume Iruoghene <akanumeiruoghene@gmail.com>
+Date:   Tue Oct 14 15:02:09 2025 +0100
+
+    Initial commit
+
+[33mcommit 4cebb76ffc31854b70c10f96d02810d400776cbf[m
+Author: Avagel <akanumeiruoghene@gmail.com>
+Date:   Tue Oct 14 14:55:20 2025 +0100
+
+    Update .gitignore
+
+[33mcommit 539ae1c0472e562672740b247044da115edded3f[m
+Author: Avagel <akanumeiruoghene@gmail.com>
+Date:   Tue Oct 14 14:51:44 2025 +0100
+
+    Initial commit

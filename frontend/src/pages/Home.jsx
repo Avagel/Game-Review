@@ -22,7 +22,7 @@ export const Home = ({}) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [news, setNews] = useState();
-  
+
   useEffect(() => {
     if (news && news.length > 0 && games && games.length > 0) setLoading(false);
   });
@@ -39,7 +39,9 @@ export const Home = ({}) => {
 
   const fetchNews = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/news`);
+      const res = await axios.get(
+        `https://game-review-production-ede3.up.railway.app/api/news`
+      );
       setNews(res.data.articles);
     } catch (err) {
       console.error("Fetching news failed: ", err);
@@ -49,7 +51,9 @@ export const Home = ({}) => {
 
   const fetchGames = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/games/1");
+      const res = await axios.get(
+        "https://game-review-production-ede3.up.railway.app/api/games/1"
+      );
       const data = res.data;
       setGames(data.results);
       // setLoading(false);
