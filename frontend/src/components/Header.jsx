@@ -70,7 +70,6 @@ export const Header = () => {
           navigate(-1);
         }}
       />
-
       <p
         className={`text-base text-orange-500 tracking-widest font-medium cursor-pointer text-center ${
           isSearch ? "hidden" : ""
@@ -120,5 +119,56 @@ export const Header = () => {
         ""
       )}
     </div>
+    // <div
+    //   className={`fixed w-full  py-5 px-9 flex justify-between items-center transision-all duration-300 z-5 `}
+    // >
+    //   <div className="w-1/3 ">
+    //     <FontAwesomeIcon
+    //       icon={faCaretLeft}
+    //       className="text-base text-white "
+    //       onClick={() => {
+    //         navigate(-1);
+    //       }}
+    //     />
+    //   </div>
+    //   <nav className=" w-1/3  flex items-center  gap-3 text-white tracking-widest">
+    //     <NavLink
+    //       style={({ isActive }) => ({
+    //         color: isActive ? "orange" : "",
+    //       })}
+    //       to={"/home"}
+    //     >
+    //       Home
+    //     </NavLink>
+    //     <NavLink
+    //       to={"/browse/1"}
+    //       style={({ isActive }) => ({
+    //         color: isActive ? "orange" : "",
+    //       })}
+    //     >
+    //       Browse
+    //     </NavLink>
+    //     <NavLink
+    //       to={"/news"}
+    //       style={({ isActive }) => ({
+    //         color: isActive ? "orange" : "",
+    //       })}
+    //     >
+    //       News
+    //     </NavLink>
+    //   </nav>
+
+    //   <form onSubmit={handleSubmit} className="w-1/3 flex justify-end ">
+    //     <input
+    //       ref={inputRef}
+    //       onChange={() => {
+    //         console.log("iriu");
+    //       }}
+    //       type="text"
+    //       className={` transition-all duration-300 bg-zinc-600/50  backdrop-blur-[50px] text-white tracking-widest  rounded-md cursor-pointer ${"w-60/100 px-3  h-7"} right-0 text-xs `}
+    //       placeholder="Search Game"
+    //     />
+    //   </form>
+    // </div>
   );
 };

@@ -4,7 +4,7 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 export const NewsCard = ({ article }) => {
   const openClass =
-    "h-fit py-2  box-border w-full transition-all duration-300 relative overflow-hidden rounded-xs flex flex-col  shadow-[0_4px_4px_rgba(0,0,0,0.25)]";
+    "h-fit py-2 box-border w-full transition-all duration-300 relative overflow-hidden rounded-xs flex flex-col  shadow-[0_4px_4px_rgba(0,0,0,0.25)]";
   const {
     title = "Title",
     urlToImage,

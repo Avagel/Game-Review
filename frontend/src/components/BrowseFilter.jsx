@@ -179,7 +179,7 @@ export const BrowseFilter = ({
 
   return (
     <div
-      className=" fixed w-full transition-all duration-300 bottom-0 bg-zinc-900 pt-7 pl-3 overflow-hidden"
+      className=" fixed w-full lg:w-85/100 lg:left-[50%] lg:translate-x-[-50%] transition-all duration-300 bottom-0 bg-zinc-900 pt-7 pl-3 overflow-hidden "
       style={{
         height: `${height}%`,
       }}
@@ -200,7 +200,7 @@ export const BrowseFilter = ({
             Lorem ipsum dolor sit amet.
           </p>
         </div>
-        <div className="overflow-scroll h-100">
+        <div className="overflow-auto h-full [scrollbar-width:none] [-webkit-scrollbar:display:none]">
           {data[mode].map((item) => {
             if (mode == "order") {
               return (

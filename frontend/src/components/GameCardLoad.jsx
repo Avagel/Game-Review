@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router";
 export const GameCardLoad = () => {
   return (
     <div
-      className={`flex-none loading box-border w-35 p-3 rounded-md h-fit aspect-120/168 font-medium text-xs overflow-hidden bg-zinc-800/60 flex flex-col`}
+      className={`flex-none loading box-border p-3 rounded-md h-fit aspect-190/300 font-medium text-xs overflow-hidden bg-zinc-800/60 flex flex-col`}
       onClick={() => {
         navigate("/overview/" + name, {
           state: { gameID, similar },

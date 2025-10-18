@@ -8,9 +8,11 @@ import { NewsCardII } from "../components/NewsCardII";
 
 export const News = ({ news, setNews }) => {
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
-    if (news && news.length > 0) return;
+    if (news && news.length > 0) {
+      return;
+    }
     fetchNews();
   });
 
@@ -28,10 +30,12 @@ export const News = ({ news, setNews }) => {
   };
 
   return error ? (
-    <div className="absolute w-full h-full flex flex-col items-center justify-center">
+    <div className="absolute w-full h-full flex flex-col items-center justify-center ">
       <img className="w-20" src={sadtear} alt="image" />
 
-      <p className="text-sm font-medium mt-1 text-zinc-500 tracking-wider">{error}</p>
+      <p className="text-sm font-medium mt-1 text-zinc-500 tracking-wider">
+        {error}
+      </p>
 
       <NavLink
         onClick={() => {
@@ -49,7 +53,7 @@ export const News = ({ news, setNews }) => {
       <p className=" mb-5 mt-15 text-3xl text-center text-white ">
         Latest News
       </p>
-      <div className="flex flex-col gap-7 mb-7.5">
+      <div className="grid lg:grid-cols-3 lg:gap-9 lg:px-30 md:grid md:grid-cols-2 md:gap-5 gap-7 mb-7.5">
         {news.slice(0, 11).map((article, index) => {
           return <NewsCardII key={index} article={article} />;
         })}

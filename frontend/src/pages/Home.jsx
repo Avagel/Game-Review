@@ -30,6 +30,8 @@ export const Home = ({ news, setNews }) => {
   const [games, setGames] = useState(null);
   const [hiddenGems, setHiddenGems] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [hiddenSelected, setHiddenSelected] = useState(true);
+  const [trending, setTrending] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -45,6 +47,7 @@ export const Home = ({ news, setNews }) => {
     if (games && games.length > 0) return;
     fetchGames();
     fetchHiddenGems();
+    fetchTrendingGames();
   }, []);
 
   const fetchNews = async () => {
@@ -61,6 +64,19 @@ export const Home = ({ news, setNews }) => {
     }
   };
 
+  const fetchTrendingGames = async () => {
+    try {
+      const res = await axios.get(
+        "https://game-review-production-ede3.up.railway.app/api/games/30&ordering=rating"
+      );
+      const data = res.data;
+      setTrending(data.results);
+      console.log("fetched successfully");
+    } catch (error) {
+      console.log("Fetching games Failed ", error);
+      setError(error.message);
+    }
+  };
   const fetchHiddenGems = async () => {
     try {
       const res = await axios.get(
@@ -91,24 +107,13 @@ export const Home = ({ news, setNews }) => {
     }
   };
 
-  const hiddenGemScore = (game) => {
-    const metacritic = game.metacritic || 75; // default if null
-    const rating = game.rating || 4;
-    const ratingsCount = game.ratings_count || 10;
-
-    const score =
-      (metacritic / 100) * 0.4 +
-      (rating / 5) * 0.4 +
-      (1 / (1 + ratingsCount / 1000)) * 0.2;
-
-    return score;
-  };
-
   return error ? (
     <div className="absolute w-full h-full flex flex-col items-center justify-center">
       <img className="w-20" src={sadtear} alt="image" />
 
-      <p className="text-sm font-medium mt-1 text-zinc-500 tracking-wider">{error}</p>
+      <p className="text-sm font-medium mt-1 text-zinc-500 tracking-wider">
+        {error}
+      </p>
 
       <NavLink
         onClick={() => {
@@ -133,20 +138,38 @@ export const Home = ({ news, setNews }) => {
 
         <div className="w-full rounded-xl h-fit bg-gradient-to-b from-zinc-800/50  to-zinc-950  py-2.5 px-3 lg:bg-none">
           <nav className="mb-5">
-            <button className="text-xs px-5 rounded-full text-white py-2.5 bg-zinc-950 mr-3 lg:bg-zinc-800">
+            <button
+              onClick={() => {
+                setHiddenSelected(true);
+              }}
+              className={`text-xs px-5 rounded-full text-white py-2.5 mr-3 ${
+                hiddenSelected ? "bg-zinc-950 lg:bg-zinc-800" : ""
+              } `}
+            >
               {" "}
               Hidden Gems
             </button>
-            <button className="text-xs px-5 rounded-full text-white py-2.5 bg-zinc-950">
+            <button
+              onClick={() => {
+                setHiddenSelected(false);
+              }}
+              className={`text-xs px-5 rounded-full text-white py-2.5 ${
+                !hiddenSelected ? "bg-zinc-950 lg:bg-zinc-800" : ""
+              }`}
+            >
               {" "}
               Trending
             </button>
           </nav>
 
           <div className="flex gap-3 overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none] mb-25">
-            {hiddenGems?.map((item) => {
-              return <GameCard gameData={item} />;
-            })}
+            {hiddenSelected
+              ? hiddenGems?.map((item) => {
+                  return <GameCard gameData={item} />;
+                })
+              : trending?.map((item) => {
+                  return <GameCard gameData={item} />;
+                })}
           </div>
         </div>
       </div>
@@ -158,9 +181,9 @@ export const Home = ({ news, setNews }) => {
           Browse All Genres
         </div>
 
-        <div className="flex gap-3 px-3 overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none]  lg:mt-5">
+        <div className="flex gap-3 px-3 overflow-auto justify-center [scrollbar-width:none] [-webkit-scrollbar:display:none]  lg:mt-5">
           <div
-            className="relative w-fit"
+            className="relative w-fit hover:scale-110 transition-all duration-300"
             onClick={() => {
               navigate("/browse/1", { state: { _filter: [2, 4] } });
             }}
@@ -189,7 +212,7 @@ export const Home = ({ news, setNews }) => {
           </div>
 
           <div
-            className="relative w-fit"
+            className="relative w-fit hover:scale-110 transition-all duration-300"
             onClick={() => {
               navigate("/browse/1", { state: { _filter: 2 } });
             }}
@@ -217,7 +240,7 @@ export const Home = ({ news, setNews }) => {
           </div>
 
           <div
-            className="relative w-fit"
+            className="relative w-fit hover:scale-110 transition-all duration-300"
             onClick={() => {
               navigate("/browse/1", { state: { _filter: 3 } });
             }}
@@ -246,7 +269,7 @@ export const Home = ({ news, setNews }) => {
           </div>
 
           <div
-            className="relative w-fit"
+            className="relative w-fit hover:scale-110 transition-all duration-300"
             onClick={() => {
               navigate("/browse/1", { state: { _filter: 4 } });
             }}
@@ -275,7 +298,7 @@ export const Home = ({ news, setNews }) => {
           </div>
 
           <div
-            className="relative w-fit"
+            className="relative w-fit hover:scale-110 transition-all duration-300"
             onClick={() => {
               navigate("/browse/1", { state: { _filter: 15 } });
             }}
@@ -310,7 +333,7 @@ export const Home = ({ news, setNews }) => {
         <p className="text-base lg:text-3xl text-white text-center mb-5">
           See Latest News
         </p>
-        <div className="flex flex-col px-3 gap-15 mb-10 lg:grid lg:grid-cols-3 lg:px-30 ">
+        <div className="flex flex-col px-3 gap-15 mb-10 lg:grid lg:grid-cols-3 md:grid md:grid-cols-2 lg:px-30 ">
           {news.slice(0, 4).map((article, index) => {
             return <NewsCardII article={article} />;
           })}

@@ -75,7 +75,7 @@ export const Search = () => {
 
   return (
     <div
-      className="pt-15 px-3 grid grid-cols-2 gap-3 overflow-auto h-screen [scrollbar-width:none] [-webkit-scrollbar:display:none] "
+      className="pt-15 px-3 grid grid-cols-2 gap-3 overflow-auto h-screen [scrollbar-width:none] [-webkit-scrollbar:display:none] lg:grid-cols-4 lg:gap-9 lg:px-30 md:grid md:grid-cols-3 md:gap-5"
       ref={containerRef}
     >
       {error ? (

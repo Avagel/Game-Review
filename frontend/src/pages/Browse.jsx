@@ -221,7 +221,7 @@ export const Browse = ({ games, setGames, filter, setFilter }) => {
         </div>
       </div>
 
-      <div className="mt-5 px-3 grid grid-cols-2 gap-3">
+      <div className="mt-5 px-3  grid grid-cols-2 md:grid md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-9 lg:px-30 gap-3 ">
         {loading
           ? dummy.map(() => {
               return <GameCardLoad />;
@@ -242,7 +242,7 @@ export const Browse = ({ games, setGames, filter, setFilter }) => {
 
       {/*----------------------------------PAGINATION-----------------------------*/}
 
-      <div className="w-full px-3 h-fit flex justify-between text-base text-white my-7 px-6 text-sm">
+      <div className="w-full px-3 h-fit flex justify-between text-base text-white my-7 px-6 lg:px-30 text-sm">
         <button className="rounded-full w-6 bg-zinc-800/60 ">
           <FontAwesomeIcon
             icon={faCaretLeft}
