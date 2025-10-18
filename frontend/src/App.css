@@ -3,6 +3,13 @@
   border: 0;
 }
 
+.mask {
+  mask: linear-gradient(white, transparent 80%);
+}
+.mask-about {
+  mask: linear-gradient(white, transparent 80%);
+}
+
 @keyframes loading {
   from {
     background-color: #cbc9cf1a;
@@ -10,4 +17,17 @@
   to {
     background-color: #cbc9cf2f;
   }
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50%));
+  }
+}
+
+[data-animated="true"] .scroller__inner {
+  animation: scroll 20s linear infinite;
 }

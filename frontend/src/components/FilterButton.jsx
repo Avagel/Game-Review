@@ -2,31 +2,41 @@
 
 import React, { useState } from "react";
 
-export const FilterButton = React.memo(({ name, setMap, id, _active }) => {
+export const FilterButton = ({ data, mode, filters, setFilters }) => {
   // Only use required props
+  const _active = filters[mode].includes(mode == "order" ? data : data.id)
+    ? true
+    : false;
   const [active, setActive] = useState(_active);
 
   const handleClick = () => {
-    setMap((prev) => {
-      const _new = new Map(prev);
-      if (_new.has(id)) {
-        _new.delete(id);
-      } else {
-        _new.set(id, name);
-      }
-      return _new;
-    });
     setActive((prev) => !prev);
+
+    setFilters((prev) => {
+      if (prev[mode].includes(mode == "order" ? data : data.id)) {
+        const dup = prev[mode].slice();
+        dup.pop(mode == "order" ? data : data.id);
+        return {
+          ...prev,
+          [mode]: dup,
+        };
+      } else {
+        return {
+          ...prev,
+          [mode]: [...prev[mode], mode == "order" ? data : data.id],
+        };
+      }
+    });
   };
 
   return (
     <button
-      className={`text-xs h-fit py-2 m-1 border border-orange-500 px-2 rounded-md ${
-        active ? "bg-orange-500" : ""
+      className={`text-xs text-zinc-300 tracking-wider h-fit py-2 m-1 border border-orange-500 px-2 rounded-md ${
+        active ? "bg-orange-500 text-zinc-900" : ""
       }`}
       onClick={handleClick}
     >
-      {name}
+      {mode == "order" ? data : data.name}
     </button>
   );
-});
+};

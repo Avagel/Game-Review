@@ -6,22 +6,31 @@ import { useEffect, useState } from "react";
 import Carousel from "../components/Carousel";
 import { NavLink, useNavigate } from "react-router";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import apex from "../assets/apex.png";
-import cod from "../assets/cod.png";
-import mc from "../assets/mc.png";
-import apexI from "../assets/apex.jpg";
-import codI from "../assets/cod.jpg";
-import mcI from "../assets/mc.jpg";
+import apex from "../assets/apex.jpg";
+import apexpng from "../assets/apex.png";
+
+import sekiro from "../assets/sekiro.jpg";
+import sekiropng from "../assets/sekiropng.png";
+
+import spiderman from "../assets/spiderman.jpg";
+import spidermanpng from "../assets/spidermanpng.png";
+
+import shooter from "../assets/shooter.jpg";
+import shooterpng from "../assets/shooterpng.png";
+
+import sports from "../assets/sports.jpg";
+import sportspng from "../assets/sportspng.png";
+
 import axios from "axios";
 import Loader from "../components/Loader";
 import sadtear from "../assets/sadtear.svg";
 
-export const Home = ({}) => {
+export const Home = ({ news, setNews }) => {
   const navigate = useNavigate();
   const [games, setGames] = useState(null);
+  const [hiddenGems, setHiddenGems] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [news, setNews] = useState();
 
   useEffect(() => {
     if (news && news.length > 0 && games && games.length > 0) setLoading(false);
@@ -35,27 +44,45 @@ export const Home = ({}) => {
   useEffect(() => {
     if (games && games.length > 0) return;
     fetchGames();
+    fetchHiddenGems();
   }, []);
 
   const fetchNews = async () => {
     try {
+      console.log("fetching news");
       const res = await axios.get(
         `https://game-review-production-ede3.up.railway.app/api/news`
       );
       setNews(res.data.articles);
+      console.log("news fetched");
     } catch (err) {
       console.error("Fetching news failed: ", err);
       setError(err.message);
     }
   };
 
+  const fetchHiddenGems = async () => {
+    try {
+      const res = await axios.get(
+        "https://game-review-production-ede3.up.railway.app/api/games/90"
+      );
+      const data = res.data;
+      setHiddenGems(data.results);
+      console.log("fetched successfully");
+    } catch (error) {
+      console.log("Fetching games Failed ", error);
+      setError(error.message);
+    }
+  };
   const fetchGames = async () => {
     try {
       const res = await axios.get(
-        "https://game-review-production-ede3.up.railway.app/api/games/1"
+        "https://game-review-production-ede3.up.railway.app/api/games/5"
       );
       const data = res.data;
       setGames(data.results);
+      console.log("fetched successfully");
+
       // setLoading(false);
     } catch (error) {
       console.log("Fetching games Failed ", error);
@@ -81,7 +108,7 @@ export const Home = ({}) => {
     <div className="absolute w-full h-full flex flex-col items-center justify-center">
       <img className="w-20" src={sadtear} alt="image" />
 
-      <p className="text-sm font-medium mt-1">{error}</p>
+      <p className="text-sm font-medium mt-1 text-zinc-500 tracking-wider">{error}</p>
 
       <NavLink
         onClick={() => {
@@ -95,125 +122,212 @@ export const Home = ({}) => {
   ) : loading ? (
     <Loader />
   ) : (
-    <div className="w-full relative text-sm m-0 pb-3 ">
-      <div className="flex relative h-50 gap-3 [scrollbar-width:none] [-webkit-scrollbar:display:none] w-full ">
-        <Carousel slidesData={games} />
-      </div>
+    <div className="h-screen  overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none]">
+      <Carousel data={games.slice(0, 6)} />
+      {/*--------------Hidden Gems------------------ */}
 
-      <div className="px-3 w-full flex mt-10 justify-between items-center">
-        <p className=" font-bold  mb-4 text-base text-zinc-300 w-fit">
-          Hidden Gems
+      <div className="lg:mt-15 lg:px-30">
+        <p className="text-base lg:text-3xl text-white text-center mb-5">
+          Discover Games <br /> From all Corners on Earth
         </p>
-        <p className="font-bold  mb-1 text-xs font-medium text-zinc-500 w-fit">
-          All
-          <FontAwesomeIcon icon={faCaretRight} />
-        </p>
-      </div>
 
-      <div className="px-3 flex flex-nowrap overflow-x-auto gap-3 scrollbar-hide w-full [scrollbar-width:none] [-webkit-scrollbar:display:none] ">
-        {games.map((gameData, index) => {
-          const { genres } = gameData;
+        <div className="w-full rounded-xl h-fit bg-gradient-to-b from-zinc-800/50  to-zinc-950  py-2.5 px-3 lg:bg-none">
+          <nav className="mb-5">
+            <button className="text-xs px-5 rounded-full text-white py-2.5 bg-zinc-950 mr-3 lg:bg-zinc-800">
+              {" "}
+              Hidden Gems
+            </button>
+            <button className="text-xs px-5 rounded-full text-white py-2.5 bg-zinc-950">
+              {" "}
+              Trending
+            </button>
+          </nav>
 
-          const similar = games.filter((game) => {
-            let check = 0;
-            genres.forEach((genre) => {
-              if (game.genres.find((g) => g.id === genre.id)) check++;
-            });
-            if (check > 1) return game;
-          });
-
-          const score = hiddenGemScore(gameData);
-          if (score > 0.75 && score < 0.85) {
-            return (
-              <GameCard key={index} gameData={gameData} similar={similar} />
-            );
-          }
-        })}
-      </div>
-
-      <p className="font-bold mb-4 text-base ml-3 text-zinc-300 w-fit mt-10">
-        Browse All Genres
-      </p>
-
-      <div className="relative h-60 w-full px-3">
-        <div className="flex h-full gap-2 ">
-          <div className="relative h-30 w-34 bg-zinc-700 overflow-hidden rounded-md">
-            <img
-              className="w-full h-full object-cover bg-zinc-800/60"
-              src={codI}
-              alt=""
-            />
-            <p className="absolute font-bold text-3xl left-1/2 text- -translate-x-1/2 top-5 after:content-[Battle Royale]">
-              Shooter
-            </p>
-
-            <img
-              className="absolute inset-0 w-full h-full object-cover "
-              src={cod}
-              alt=""
-            />
-          </div>
-          <div className="relative h-full flex-1 bg-zinc-800 rounded-md overflow-hidden">
-            <p className="absolute font-bold text-5xl left-1/2 text- -translate-x-1/2 top-5 after:content-[Battle Royale]">
-              Battle Royale
-            </p>
-            <p
-              className="absolute font-bold 
-            text-transparent [-webkit-text-stroke:0.3px_white] text-5xl left-1/2 -translate-x-1/2 top-5  z-1"
-            >
-              Battle Royale
-            </p>
-            <img
-              className="card absolute inset-0 w-full h-full object-cover drop-shadow-xs"
-              src={apex}
-              alt=""
-            />
-            <img
-              className="w-full h-full object-cover bg-zinc-800/60"
-              src={apexI}
-              alt=""
-            />
-          </div>
-
-          <div className="absolute bottom-0 h-27 box-content w-60/100 border-t-8 border-r-8 border-zinc-900   rounded-tr-md rounded-br-0">
-            <img
-              className="w-full h-full object-cover bg-zinc-800/60 rounded-md overflow-hidden"
-              src={mcI}
-              alt=""
-            />
-            <p className="absolute font-bold text-3xl left-1/2 -translate-x-1/2 top-5 text-white">
-              Adventure
-            </p>
-
-            <img
-              className="absolute inset-0 w-full h-full object-cover "
-              src={mc}
-              alt=""
-            />
+          <div className="flex gap-3 overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none] mb-25">
+            {hiddenGems?.map((item) => {
+              return <GameCard gameData={item} />;
+            })}
           </div>
         </div>
       </div>
 
-      <div className="px-3 w-full mt-10 flex justify-between items-center">
-        <p className=" font-bold mb-4 text-base text-zinc-300 w-fit ">
-          Latest News
-        </p>
-        <p
-          className="font-bold mb-1 text-xs font-medium text-zinc-500 w-fit cursor-pointer"
-          onClick={() => {
-            navigate("/news");
-          }}
-        >
-          All
-          <FontAwesomeIcon icon={faCaretRight} />
-        </p>
+      {/*-------------Browse All Genres--------------*/}
+      <div className="h-fit pb-3 w-full  bg-zinc-900 rounded-md relative mb-25 lg:flex lg:items-center lg:flex-col">
+        <div className="absolute bg-zinc-950 rounded-full px-5 text-white text-base -translate-y-[50%] left-[50%] -translate-x-[50%] lg:text-3xl ">
+          {" "}
+          Browse All Genres
+        </div>
+
+        <div className="flex gap-3 px-3 overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none]  lg:mt-5">
+          <div
+            className="relative w-fit"
+            onClick={() => {
+              navigate("/browse/1", { state: { _filter: [2, 4] } });
+            }}
+          >
+            <div className="relative flex flex-col items-center w-30 h-40 ">
+              <div className="h-30 absolute bottom-0 w-28 overflow-hidden rounded-t-md">
+                <img
+                  src={apex}
+                  className="h-40 w-full object-cover absolute bottom-0"
+                  alt=""
+                />
+              </div>
+              <div className="h-40 w-30 inset-0 absolute">
+                <img
+                  src={apexpng}
+                  className="h-40 w-full object-cover"
+                  alt=""
+                />
+              </div>
+            </div>
+
+            <p className="absolute text-white text-center text-base left-[50%] -translate-x-[50%] top-[70%] tracking-wider">
+              Battle <br /> Royale
+            </p>
+            <div className="h-8 bg-sky-500 rounded-b-md bg-zinc-950"></div>
+          </div>
+
+          <div
+            className="relative w-fit"
+            onClick={() => {
+              navigate("/browse/1", { state: { _filter: 2 } });
+            }}
+          >
+            <div className="relative flex flex-col items-center w-30 h-40 ">
+              <div className="h-30 absolute bottom-0 w-28 overflow-hidden rounded-t-md">
+                <img
+                  src={shooter}
+                  className="h-40 w-full object-cover absolute bottom-0"
+                  alt=""
+                />
+              </div>
+              <div className="h-40 w-30 inset-0 absolute">
+                <img
+                  src={shooterpng}
+                  className="h-40 w-full object-cover"
+                  alt=""
+                />
+              </div>
+            </div>
+            <p className="absolute text-white text-center text-base left-[50%] -translate-x-[50%] top-[85%] tracking-wider">
+              Shooter
+            </p>
+            <div className="h-8 bg-sky-500 rounded-b-md bg-zinc-950"></div>
+          </div>
+
+          <div
+            className="relative w-fit"
+            onClick={() => {
+              navigate("/browse/1", { state: { _filter: 3 } });
+            }}
+          >
+            <div className="relative flex flex-col items-center w-30 h-40 ">
+              <div className="h-30 absolute bottom-0 w-28 overflow-hidden rounded-t-md">
+                <img
+                  src={spiderman}
+                  className="h-40 w-full object-cover absolute bottom-0"
+                  alt=""
+                />
+              </div>
+              <div className="h-40 w-30 inset-0 absolute">
+                <img
+                  src={spidermanpng}
+                  className="h-40 w-full object-cover"
+                  alt=""
+                />
+              </div>
+            </div>
+
+            <p className="absolute text-white text-center text-base left-[50%] -translate-x-[50%] top-[85%] tracking-wider">
+              Adventure
+            </p>
+            <div className="h-8 bg-sky-500 rounded-b-md bg-zinc-950"></div>
+          </div>
+
+          <div
+            className="relative w-fit"
+            onClick={() => {
+              navigate("/browse/1", { state: { _filter: 4 } });
+            }}
+          >
+            <div className="relative flex flex-col items-center w-30 h-40 ">
+              <div className="h-30 absolute bottom-0 w-28 overflow-hidden rounded-t-md">
+                <img
+                  src={sekiro}
+                  className="h-40 w-full object-cover absolute bottom-0"
+                  alt=""
+                />
+              </div>
+              <div className="h-40 w-30 inset-0 absolute">
+                <img
+                  src={sekiropng}
+                  className="h-40 w-full object-cover"
+                  alt=""
+                />
+              </div>
+            </div>
+
+            <p className="absolute text-white text-center text-base left-[50%] -translate-x-[50%] top-[85%] tracking-wider">
+              Action
+            </p>
+            <div className="h-8 bg-sky-500 rounded-b-md bg-zinc-950"></div>
+          </div>
+
+          <div
+            className="relative w-fit"
+            onClick={() => {
+              navigate("/browse/1", { state: { _filter: 15 } });
+            }}
+          >
+            <div className="relative flex flex-col items-center w-30 h-40 ">
+              <div className="h-30 absolute bottom-0 w-30 overflow-hidden rounded-t-md">
+                <img
+                  src={sports}
+                  className="h-40 w-full object-cover absolute bottom-0"
+                  alt=""
+                />
+              </div>
+              <div className="h-40 w-30 inset-0 absolute">
+                <img
+                  src={sportspng}
+                  className="h-40 w-full object-cover"
+                  alt=""
+                />
+              </div>
+            </div>
+
+            <p className="absolute text-white text-center text-base left-[50%] -translate-x-[50%] top-[85%] tracking-wider">
+              Sports
+            </p>
+            <div className="h-8 bg-sky-500 rounded-b-md bg-zinc-950"></div>
+          </div>
+        </div>
       </div>
 
-      <div className="px-3 flex flex-col gap-3">
-        {news.slice(0, 4).map((article, index) => {
-          return <NewsCardII article={article} />;
-        })}
+      {/*-------------------NEWS---------------------*/}
+      <div>
+        <p className="text-base lg:text-3xl text-white text-center mb-5">
+          See Latest News
+        </p>
+        <div className="flex flex-col px-3 gap-15 mb-10 lg:grid lg:grid-cols-3 lg:px-30 ">
+          {news.slice(0, 4).map((article, index) => {
+            return <NewsCardII article={article} />;
+          })}
+        </div>
+        <div className="flex justify-center h-fit items-center w-full mb-15">
+          <button
+            className="text-xs px-5 rounded-full text-white py-2.5 border border-orange-500 mt-4 tracking-widest "
+            onClick={() => {
+              navigate("/news");
+            }}
+          >
+            {" "}
+            See More
+          </button>
+        </div>
       </div>
+      <footer className="text-zinc-300 text-center mb-4">Made By Iruo</footer>
     </div>
   );
 };

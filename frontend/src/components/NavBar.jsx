@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { NavLink } from "react-router";
 
-export const NavBar = ({ getText,closeMenu }) => {
+export const NavBar = ({ getText, closeMenu }) => {
   const [height, setHeight] = useState("0");
   const [position, setPosition] = useState("");
   const [isOpen, setIsOpen] = useState(false);

@@ -1,81 +1,76 @@
-import { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import mc from "../assets/mc.jpg";
+import apex from "../assets/apex.jpg";
+import { useEffect } from "react";
+import { Star } from "lucide-react";
 
-import { PopularCard } from "./PopularCard";
+export default function Carousel({ data }) {
+  console.log(data);
+  const images = data?.map((item) => {
+    return item.background_image;
+  });
+  const names = data?.map((item) => {
+    return item.name;
+  });
 
-// Sample data for the carousel slides
+  const [index, setIndex] = useState(0);
 
-const Carousel = ({ slidesData }) => {
-  slidesData = slidesData.slice(0, 10);
-  // 1. State: Tracks the index of the currently visible slide.
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const totalSlides = slidesData.length;
-
-  // 2. Navigation Logic: Handles moving to the next slide
-  const goToNext = () => {
-    // If we're on the last slide, go back to 0. Otherwise, increment.
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
-  };
-
-  // 3. Navigation Logic: Handles moving to the previous slide
-  const goToPrev = () => {
-    // If we're on the first slide (0), go to the last slide. Otherwise, decrement.
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + totalSlides) % totalSlides);
-  };
-
-  // Optional: Auto-play feature
+  console.log(index);
   useEffect(() => {
-    const interval = setInterval(goToNext, 5000); // Change slide every 5 seconds
-    return () => clearInterval(interval); // Cleanup function to clear the interval
-  }, [currentIndex]); // Restart timer whenever the index changes
+    console.log("render");
+    setTimeout(handleChange, 5000);
+  }, []);
+
+  const handleChange = () => {
+    setIndex((prev) => {
+      if (prev >= images.length - 1) return 0;
+      else {
+        return prev + 1;
+      }
+    });
+    setTimeout(handleChange, 5000);
+  };
 
   return (
     <>
-    <img className="absolute transituon-all duration-300 inset-0 w-full h-full blur-[30px]" src={slidesData[currentIndex].background_image} alt="" />
+      <div className="relative h-80/100 lg:h-full overflow-hidden ">
+        {/* <div
+          className="h-40/100 absolute bg-zinc-950 blur-xl z-0 overflow-hidden w-[150%] left-[50%]
+        translate-x-[-50%]  bottom-[-50px]"
+        ></div> */}
+        <div
+          className="mask w-full object-cover h-full"
+          style={{
+            backgroundImage: `url(${images[index] || mc})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            transition: ".5s all linear",
+          }}
+        ></div>
 
-      <div className="flex flex-col h-full w-full overflow-hidden">
-
-        <div className="relative  w-full h-full aspect-[16/9] ">
-          {/* Slides Track: All slides are horizontal, shifted by CSS transform */}
-          <div
-            className="flex h-full transition-transform duration-700 ease-in-out"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
-            {slidesData.map((slide) => (
-              // Individual Slide: Must take up 100% width and not shrink
-              <PopularCard gameData = {slide} />
-            ))}
+        <div className="flex flex-col items-center inset-0 top-[65%] absolute ">
+          <p className="text-4xl text-white p-0 tracking-widest h-fit mb-1 text-center">
+            {names ? names[index] : "Minecraft"}
+          </p>
+          <div className="flex items-center gap-1 mb-4">
+            <p className="text-[10px] text-zinc-400 ">Action | Adventure |</p>
+            <span className="flex">
+              <Star size={10} className="text-orange-500" />
+              <Star size={10} className="text-orange-500" />
+              <Star size={10} className="text-orange-500" />
+              <Star size={10} className="text-orange-500" />
+              <Star size={10} className="text-orange-500" />
+            </span>
+          </div>
+          <div className="w-25 rounded-full h-1 bg-white">
+            <div
+              className={` bg-orange-500 h-full rounded-full transition-all duration-300`}
+              style={{ width: (index / (images.length - 1)) * 100 + "%" }}
+            ></div>
           </div>
         </div>
-        {/* --- Dot Indicators --- */}
-      
-
       </div>
     </>
   );
-};
-
-// Helper component for navigation buttons
-// const CarouselButton = ({ direction, onClick }) => {
-//   const isNext = direction === "next";
-//   const icon = isNext ? (
-//     <FontAwesomeIcon icon={faCaretRight} className="h-6 w-6" />
-//   ) : (
-//     <FontAwesomeIcon icon={faCaretLeft} className="h-6 w-6" />
-//   );
-//   const position = isNext ? "right-4" : "left-4";
-
-//   return (
-//     <button
-//       onClick={onClick}
-//       className={`absolute top-1/2 ${position} transform -translate-y-1/2 bg-zinc-950/80 bg-opacity-40 text-white p-3 rounded-full 
-//       w-4 h-4 hover:bg-opacity-70 transition duration-200 z-2 shadow-xl  ring-opacity-20 flex items-center justify-center`}
-//       aria-label={`${direction} Slide`}
-//     >
-//       {icon}
-//     </button>
-//   );
-// };
-
-export default Carousel;
+}

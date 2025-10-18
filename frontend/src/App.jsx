@@ -24,6 +24,7 @@ import { Search } from "./pages/Search";
 
 function App() {
   const [games, setGames] = useState([]);
+  const [news, setNews] = useState([]);
   const [BrowseFilter, setBrowseFilter] = useState();
 
   return (
@@ -31,7 +32,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+            <Route index element={<Home news={news} setNews={setNews} />} />
 
             <Route path="browse" element={<Navigate to="1" replace />} />
             <Route
@@ -47,8 +48,11 @@ function App() {
             />
 
             <Route path="overview/:gameName" element={<Overview />} />
-            <Route path="news" element={<News />} />
-            <Route path="search/:gameName" element={<Search />} />
+            <Route
+              path="news"
+              element={<News news={news} setNews={setNews} />}
+            />
+            <Route path="search/:gameName/:pagenum" element={<Search />} />
           </Route>
         </Routes>
       </BrowserRouter>

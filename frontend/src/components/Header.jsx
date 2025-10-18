@@ -1,4 +1,4 @@
-import { faBars, faKipSign } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faKipSign, faL } from "@fortawesome/free-solid-svg-icons";
 import { faCancel } from "@fortawesome/free-solid-svg-icons";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
@@ -27,6 +27,7 @@ export const Header = () => {
     const location = useLocation();
     console.log("location", location);
     if (location.pathname.includes("browse")) return "Browse";
+    if (location.pathname.includes("search")) return "Search";
 
     switch (location.pathname) {
       case "/":
@@ -45,31 +46,40 @@ export const Header = () => {
     searchValue = searchValue.toLowerCase().trim();
     if (!searchValue) return;
 
-    navigate(`/search/${searchValue}`);
+    navigate(`/search/${searchValue}/1`);
   };
+  const location = useLocation();
+  useEffect(() => {
+    setIsSearch(false);
+  }, [location]);
 
   return (
     <div
-      className={`w-full sticky top-0  py-5 px-3 grid transision-all duration-300  ${
-        isSearch ? "grid-cols-[30px_100fr] items-center" : "grid-cols-3"
-      } bg-zinc-950/60 backdrop-blur-xl z-7 shadow-[0_3px_3px_rgb(0,0,0)]`}
+      className={`fixed w-full  py-5 px-3 grid transision-all duration-300 ${
+        isOpen ? "bg-zinc-950" : ""
+      }  ${
+        isSearch
+          ? "grid-cols-[30px_100fr] items-center bg-zinc-900"
+          : "grid-cols-3"
+      } bg-gradient-to-b from-zinc-950  to-transparent z-7 `}
     >
       <FontAwesomeIcon
         icon={faCaretLeft}
+        className="text-base text-white"
         onClick={() => {
           navigate(-1);
         }}
       />
 
       <p
-        className={`text-sm font-medium cursor-pointer text-center ${
+        className={`text-base text-orange-500 tracking-widest font-medium cursor-pointer text-center ${
           isSearch ? "hidden" : ""
         } `}
         onClick={() => {
           setIsOpen((prev) => !prev);
         }}
       >
-        {text}{" "}
+        {text.toUpperCase()}{" "}
         <FontAwesomeIcon
           icon={faCaretDown}
           className="transition-all duration-300 "
@@ -86,14 +96,14 @@ export const Header = () => {
           <input
             ref={inputRef}
             type="text"
-            className={` transition-all duration-300 bg-zinc-800  rounded-md cursor-pointer ${
+            className={` transition-all duration-300 bg-zinc-600/50  backdrop-blur-[50px] text-white tracking-widest  rounded-md cursor-pointer ${
               isSearch ? "w-93/100 px-3  h-9" : "w-0 none"
             } right-0 text-xs `}
             placeholder="Search Game"
           />
           <FontAwesomeIcon
             icon={isSearch ? faXmark : faSearch}
-            className="text-xs"
+            className="text-base text-white"
             onClick={handleSearch}
           />
         </form>
