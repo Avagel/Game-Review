@@ -1,33 +1,29 @@
+import { Link } from "react-router";
+import sekiro from "../assets/sekiro.jpg";
 export const NewsCardII = ({ article }) => {
   const {
     title = "Title",
-    urlToImage = "",
+    urlToImage = sekiro,
     url = "",
-    description = "kslfgougnjkgg",
-    content = "sfkgllgj",
+    description = " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur itaque animi beatae ipsam excepturi, doloremque quasi atque ea enim. Repellendus corrupti accusamus quidem omnis! Consequatur hic nesciunt fugit distinctio labore.",
+    content = "lorem40",
     publishedAt = "34.56.45",
   } = article;
 
   return (
-    <div className="">
+    <div className="flex flex-col items-center">
       <img
         src={urlToImage}
         alt=""
         className="aspect-331/222 lg:w-90 object-cover rounded-[30px]"
       />
-      <p className="text-base text-xl mt-4 mb-3 text-zinc-200 tracking-wide">
+      <p className="text-base text-xl mt-3 mb-2 text-zinc-200 tracking-wide">
         {title}
       </p>
-      <p className="text-xs text-zinc-500 ">{description}.</p>
-      <button
-        className="text-xs px-5 rounded-full text-white py-2.5 bg-orange-500 mt-4 tracking-widest "
-        onClick={() => {
-          window.location.href = url;
-        }}
-      >
-        {" "}
+      <p className="text-xs text-zinc-500 text-center">{description}.</p>
+      <Link to={url} className="text-xs text-orange-500 mt-5">
         Read Article
-      </button>
+      </Link>
     </div>
   );
 };

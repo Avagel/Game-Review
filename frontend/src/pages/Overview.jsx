@@ -54,7 +54,7 @@ export const Overview = () => {
       const res = await axios.get(url);
       setSimilar(res.data.results);
     } catch (err) {
-      setError(err);
+      setError(err.message);
       console.error("Error fetching game data:", err);
     }
   };
@@ -67,7 +67,7 @@ export const Overview = () => {
 
       setGameData(res.data);
     } catch (err) {
-      setError(err);
+      setError(err.message);
       console.error("Error fetching game data:", err);
     } finally {
       try {
@@ -81,7 +81,7 @@ export const Overview = () => {
           };
         });
       } catch (err) {
-        setError(err);
+        setError(err.message);
       }
       setLoading(false);
     }

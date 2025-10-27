@@ -14,7 +14,7 @@ export const GameCard = ({ gameData = [] }) => {
     <div
       className={`${
         isBrowse || isSearch ? "" : "w-[190px] h-[300px]"
-      } aspect-190/300 p-2 bg-zinc-900 rounded-md hover:scale-90 transition-all duration-300`}
+      } aspect-190/300 p-2 bg-zinc-900/80 rounded-md hover:scale-90 transition-all duration-300`}
       onClick={() => {
         navigate("/overview/" + name, {
           state: { gameID },

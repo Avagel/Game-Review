@@ -6,29 +6,7 @@ import sadtear from "../assets/sadtear.svg";
 import axios from "axios";
 import { NewsCardII } from "../components/NewsCardII";
 
-export const News = ({ news, setNews }) => {
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    if (news && news.length > 0) {
-      return;
-    }
-    fetchNews();
-  });
-
-  const fetchNews = async () => {
-    try {
-      const res = await axios.get(
-        `https://game-review-production-ede3.up.railway.app/api/news`
-      );
-      setNews(res.data.articles);
-      setLoading(false);
-    } catch (err) {
-      console.error("Fetching news failed: ", err);
-      setError(err.message);
-    }
-  };
-
+export const News = ({ news, loading, error }) => {
   return error ? (
     <div className="absolute w-full h-full flex flex-col items-center justify-center ">
       <img className="w-20" src={sadtear} alt="image" />

@@ -21,18 +21,48 @@ import { TestCarousel } from "./pages/TestCarousel";
 import Loader from "./components/Loader";
 import sadtear from "../src/assets/sadtear.svg";
 import { Search } from "./pages/Search";
+import { TestFetch } from "./pages/TestFetch";
+import { useFetch } from "./services/useFetch";
+import { fetchGames, fetchNews } from "./services/api";
 
 function App() {
-  const [games, setGames] = useState([]);
-  const [news, setNews] = useState([]);
+  const {
+    data: games,
+    loading,
+    error,
+  } = useFetch(() =>
+    fetchGames("https://game-review-production-ede3.up.railway.app/api/games/5")
+  );
+
+  const {
+    data: news,
+    loading: newsLoading,
+    error: newsError,
+  } = useFetch(() =>
+    fetchNews(`https://game-review-production-ede3.up.railway.app/api/news`)
+  );
+
+  // const [news, setNews] = useState([]);
   const [BrowseFilter, setBrowseFilter] = useState();
 
   return (
+    // <TestFetch/>
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home news={news} setNews={setNews} />} />
+            <Route
+              index
+              element={
+                <Home
+                  news={news}
+                  games={games}
+                  error={error}
+                  loading={loading}
+                  newsLoading={newsLoading}
+                />
+              }
+            />
 
             <Route path="browse" element={<Navigate to="1" replace />} />
             <Route
@@ -40,7 +70,6 @@ function App() {
               element={
                 <Browse
                   games={games}
-                  setGames={setGames}
                   filter={BrowseFilter}
                   setFilter={setBrowseFilter}
                 />
@@ -50,7 +79,9 @@ function App() {
             <Route path="overview/:gameName" element={<Overview />} />
             <Route
               path="news"
-              element={<News news={news} setNews={setNews} />}
+              element={
+                <News news={news} loading={newsLoading} error={newsError} />
+              }
             />
             <Route path="search/:gameName/:pagenum" element={<Search />} />
           </Route>
