@@ -100,7 +100,14 @@ export const Search = () => {
           return <GameCardLoad />;
         })
       ) : (
-        games.map((game) => <GameCard key={game.id} gameData={game} />)
+        <>
+          <p className="col-span-2 text-white/80 text-lg mb-5 text-center">
+            Search result for : {gameName}
+          </p>
+          {games.map((game) => (
+            <GameCard key={game.id} gameData={game} />
+          ))}
+        </>
       )}
       {/*----------------------------------PAGINATION-----------------------------*/}
 

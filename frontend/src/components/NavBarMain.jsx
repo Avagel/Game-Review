@@ -57,14 +57,6 @@ export const NavBarMain = () => {
       } top-[85%] z-5  w-full justify-center flex gap-2`}
     >
       {isSearch ? (
-        ""
-      ) : (
-        <button className="w-12 h-12 rounded-full bg-zinc-950/80 backdrop-blur-lg flex items-center justify-center border border-orange-500">
-          {getCurrentIcon()}
-        </button>
-      )}
-
-      {isSearch ? (
         <div className="h-12 w-[90%] rounded-3xl bg-zinc-950/80 backdrop-blur-lg flex items-center gap-0 border border-orange-500 overflow-auto shrink-0 [scrollbar-width:none] [-webkit-scrollbar:display:none] transition-all duration-300 ">
           <form className="w-[90%] h-full" onSubmit={handleSubmit}>
             <input
@@ -86,36 +78,36 @@ export const NavBarMain = () => {
           </button>
         </div>
       ) : (
-        <div className="h-12 w-[70%] rounded-3xl bg-zinc-950/80 backdrop-blur-lg flex items-center gap-0 border border-orange-500 overflow-auto shrink-0 px-5 [scrollbar-width:none] [-webkit-scrollbar:display:none] transition-all duration-300">
+        <div className="h-12 w-[70%] rounded-3xl shadow-md bg-zinc-900/80 backdrop-blur-lg flex items-center gap-0  overflow-auto shrink-0 px-5 [scrollbar-width:none] [-webkit-scrollbar:display:none] transition-all duration-300">
           <button
             onClick={() => {
               navigate("/");
             }}
-            className={`w-12 h-10 rounded-full shrink-0 hover:bg-orange-500  items-center mr-3 justify-center ${
-              current == "/" ? "hidden" : "flex"
+            className={`w-12 h-10 rounded-full shrink-0 flex hover:bg-orange-500  items-center mr-3 justify-center ${
+              current == "/" ? "text-amber-500" : " text-white"
             } `}
           >
-            <House size={15} color="white" />
+            <House size={15} />
           </button>
 
           <button
             onClick={() => {
               navigate("/browse");
             }}
-            className={`w-10 h-10 rounded-full hover:bg-orange-500 shrink-0  items-center mr-3 justify-center ${
-              current.includes("browse") ? "hidden" : "flex"
+            className={`w-12 rounded-full h-10   hover:bg-orange-500 shrink-0  items-center mr-3 justify-center flex ${
+              current.includes("browse") ? "text-amber-500 " : " text-white "
             } `}
           >
-            <Compass size={15} color="white" />
+            <Compass size={15} className="shrink-0" />
           </button>
 
           <button
             onClick={() => {
               setIsSearch(true);
             }}
-            className={`w-12 h-10 rounded-full shrink-0 hover:bg-orange-500  items-center mr-3 justify-center flex `}
+            className={`w-12 h-10 rounded-full shrink-0 hover:bg-orange-500  items-center mr-3 justify-center flex text-white `}
           >
-            <Search size={15} color="white" />
+            <Search size={15} />
           </button>
 
           <button
@@ -123,23 +115,19 @@ export const NavBarMain = () => {
               navigate("/news");
             }}
             className={`w-12 h-10 rounded-full hover:bg-orange-500  shrink-0 flex items-center mr-3 justify-center ${
-              current.includes("news") ? "hidden" : "flex"
+              current.includes("news") ? "text-amber-500" : " text-white"
             } `}
           >
-            <Earth size={15} color="white" />
+            <Earth size={15} />
           </button>
 
           <button
-            className={`w-12 h-10 rounded-full hover:bg-orange-500  flex shrink-0 items-center mr-3 justify-center ${
-              "" ? "hidden" : "flex"
-            } `}
+            className={`w-12 h-10 rounded-full hover:bg-orange-500  flex shrink-0 items-center mr-3 justify-center `}
           >
             <Github size={15} color="white" />
           </button>
           <button
-            className={`w-12 h-10 rounded-full hover:bg-orange-500  shrink-0  items-center mr-3 justify-center ${
-              "" ? "hidden" : "flex"
-            } `}
+            className={`w-12 h-10 rounded-full hover:bg-orange-500  shrink-0  items-center mr-3 justify-center flex `}
           >
             <Twitter size={15} color="white" />
           </button>

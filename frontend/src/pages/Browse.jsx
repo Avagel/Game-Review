@@ -23,7 +23,8 @@ import { GameCardLoad } from "../components/GameCardLoad";
 
 import { BrowseFilter } from "../components/BrowseFilter";
 
-export const Browse = ({ games, setGames, filter, setFilter }) => {
+export const Browse = ({ games: _games, filter, setFilter }) => {
+  const [games, setGames] = useState(_games);
   const { pagenum } = useParams();
   const location = useLocation();
 
