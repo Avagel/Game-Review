@@ -26,21 +26,19 @@ import { useFetch } from "./services/useFetch";
 import { fetchGames, fetchNews } from "./services/api";
 
 function App() {
+  const apiUrl = import.meta.env.VITE_API_URL;
+  console.log("apiUrl", apiUrl);
   const {
     data: games,
     loading,
     error,
-  } = useFetch(() =>
-    fetchGames("https://game-review-production-ede3.up.railway.app/api/games/5")
-  );
+  } = useFetch(() => fetchGames(`${apiUrl}/api/games/5`));
 
   const {
     data: news,
     loading: newsLoading,
     error: newsError,
-  } = useFetch(() =>
-    fetchNews(`https://game-review-production-ede3.up.railway.app/api/news`)
-  );
+  } = useFetch(() => fetchNews(`${apiUrl}/api/news`));
 
   // const [news, setNews] = useState([]);
   const [BrowseFilter, setBrowseFilter] = useState();

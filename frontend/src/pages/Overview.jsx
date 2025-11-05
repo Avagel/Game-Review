@@ -13,6 +13,7 @@ import Loader from "../components/Loader";
 import sadtear from "../assets/sadtear.svg";
 
 export const Overview = () => {
+  const rawgApiKey = import.meta.env.VITE_RAWG_API_KEY;
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [gameData, setGameData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -49,7 +50,7 @@ export const Overview = () => {
     });
 
     try {
-      const url = `https://api.rawg.io/api/games?key=051442f84dc3402b885a0e52cecb4272&genres=${genres.join()}`;
+      const url = `https://api.rawg.io/api/games?key=${rawgApiKey}&genres=${genres.join()}`;
       console.log("fetching similar from", url);
       const res = await axios.get(url);
       setSimilar(res.data.results);
@@ -62,7 +63,7 @@ export const Overview = () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `https://api.rawg.io/api/games/${gameID}?key=051442f84dc3402b885a0e52cecb4272`
+        `https://api.rawg.io/api/games/${gameID}?key=${rawgApiKey}`
       );
 
       setGameData(res.data);
@@ -72,7 +73,7 @@ export const Overview = () => {
     } finally {
       try {
         const screenshots = await axios.get(
-          `https://api.rawg.io/api/games/${gameID}/screenshots?key=051442f84dc3402b885a0e52cecb4272`
+          `https://api.rawg.io/api/games/${gameID}/screenshots?key=${rawgApiKey}`
         );
         setGameData((prev) => {
           return {

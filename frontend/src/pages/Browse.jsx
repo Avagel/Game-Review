@@ -24,6 +24,7 @@ import { GameCardLoad } from "../components/GameCardLoad";
 import { BrowseFilter } from "../components/BrowseFilter";
 
 export const Browse = ({ games: _games, filter, setFilter }) => {
+  const rawgApiKey = import.meta.env.VITE_RAWG_API_KEY;
   const [games, setGames] = useState(_games);
   const { pagenum } = useParams();
   const location = useLocation();
@@ -88,7 +89,7 @@ export const Browse = ({ games: _games, filter, setFilter }) => {
     setLoading(true);
     const url = isFiltered
       ? getFilterLink(filter) + `&page=${pagenum}`
-      : `https://api.rawg.io/api/games?key=051442f84dc3402b885a0e52cecb4272&page=${pagenum}&ordering = rating`;
+      : `https://api.rawg.io/api/games?key=${rawgApiKey}&page=${pagenum}&ordering = rating`;
 
     console.log("fetching", url);
 
@@ -119,7 +120,7 @@ export const Browse = ({ games: _games, filter, setFilter }) => {
   };
 
   const getFilterLink = (filter) => {
-    return `https://api.rawg.io/api/games?key=051442f84dc3402b885a0e52cecb4272${
+    return `https://api.rawg.io/api/games?key=${rawgApiKey}${
       filter["developers"].length > 0
         ? "&developers=" + filter["developers"].join()
         : ""

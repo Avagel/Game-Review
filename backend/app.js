@@ -97,17 +97,17 @@ app.get("/api/news", async (req, res) => {
     console.log("Cache hit");
     return res.json(JSON.parse(cached));
   }
-  const url =
-    "https://newsapi.org/v2/everything?" +
+  const date = new Date();
+  date.setDate(date.getDate() - 2);
+
+  const url = `https://newsapi.org/v2/everything?" +
     "q=Epic%20games&" +
-    "from=2025-10-03&" +
+    "from=${date.toLocaleDateString("en-CA")}&" +
     "sortBy=popularity&" +
-    "apiKey=5c6be23958a747858dd11fb381cda64e";
+    "apiKey=${process.env.NEWS_API_KEY}`;
 
   try {
-    const _res = await axios.get(
-      `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`
-    );
+    const _res = await axios.get(url);
 
     console.log("Cache miss");
     const data = _res.data;

@@ -8,6 +8,7 @@ import sadtear from "../assets/sadtear.svg";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export const Search = () => {
+  const rawgApiKey = import.meta.env.VITE_RAWG_API_KEY;
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -49,7 +50,7 @@ export const Search = () => {
   };
 
   const fetchGames = async () => {
-    const url = `https://api.rawg.io/api/games?key=051442f84dc3402b885a0e52cecb4272&search=${gameName}&page=${pagenum} `;
+    const url = `https://api.rawg.io/api/games?key=${rawgApiKey}&search=${gameName}&page=${pagenum} `;
     setLoading(true);
     setError(null);
 

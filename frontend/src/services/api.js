@@ -1,4 +1,5 @@
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export const fetchGames = async (url) => {
   console.log("fetching games data ");
@@ -12,9 +13,7 @@ export const fetchGames = async (url) => {
 };
 
 export const fetchNews = async () => {
-  const res = await fetch(
-    `https://game-review-production-ede3.up.railway.app/api/news`
-  );
+  const res = await fetch(`${apiUrl}/api/news`);
   const results = await res.json();
 
   if (!res.ok) {
