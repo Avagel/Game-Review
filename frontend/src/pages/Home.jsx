@@ -276,14 +276,15 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
           <p className="text-base lg:text-lg text-zinc-400 text-center w-[70%] mb-10">
             From reveals to rumors — get the inside story first.
           </p>
+
           <div className="flex flex-col px-3 gap-15 mb-10 lg:grid lg:grid-cols-3 md:grid md:grid-cols-2 lg:px-30 ">
-            {
-              newsLoading ? "loading articles..." : console.log(news)
-              // : news.slice(0, 2).map((article, index) => {
-              //     return <NewsCardII article={article} />;
-              //   })}
-            }
+            {newsLoading
+              ? "loading articles..."
+              : news.slice(0, 3).map((article, index) => {
+                  return <NewsCardII article={article} />;
+                })}
           </div>
+
           <div className="flex justify-center h-fit items-center w-full ">
             <button
               className="text-xs px-5 rounded-full text-white py-2.5 border border-orange-500 mt-4 tracking-widest "

@@ -53,7 +53,9 @@ export const NavBarMain = () => {
   return (
     <div
       className={`${
-        isSearch ? "sticky lg:top-3" : "fixed lg:left-[50%] lg:-translate-x-[50%]"
+        isSearch
+          ? "sticky lg:top-3"
+          : "fixed lg:left-[50%] lg:-translate-x-[50%]"
       } top-[85%] z-5  w-full justify-center flex gap-2 lg:top-0    `}
     >
       {isSearch ? (
@@ -123,11 +125,12 @@ export const NavBarMain = () => {
             onClick={() => {
               navigate("/news");
             }}
-            className={`w-12 h-10 rounded-full hover:bg-orange-500  shrink-0 flex items-center mr-3 justify-center lg:hidden ${
-              current.includes("news") ? "text-amber-500" : " text-white"
+            className={`w-12 h-10 rounded-full hover:text-amber-500  shrink-0 flex items-center mr-3 justify-center  ${
+              current.includes("news") ? "text-amber-500" : " text-white/80"
             } `}
           >
-            <Earth size={15} />
+            <Earth size={15} className="lg:hidden" />
+            <p className="hidden lg:text-sm  lg:tracking-wide lg:block">News</p>
           </button>
 
           <button
