@@ -111,6 +111,7 @@ app.get("/api/news", async (req, res) => {
     console.log("Cache miss");
     const data = _res.data;
     await redisClient.setEx("news", 3600, JSON.stringify(data)); // cache 1h
+    res.json(data);
   } catch (err) {
     console.log("error", err);
     return res.status(500).json({
