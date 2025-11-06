@@ -76,7 +76,7 @@ export const Search = () => {
 
   return (
     <div
-      className="pt-15 px-3 grid grid-cols-2 gap-3 overflow-auto h-screen [scrollbar-width:none] [-webkit-scrollbar:display:none] lg:grid-cols-4 lg:gap-9 lg:px-30 md:grid md:grid-cols-3 md:gap-5"
+      className="relative z-4 pt-15 px-3 grid grid-cols-2 gap-3 overflow-auto h-screen [scrollbar-width:none] [-webkit-scrollbar:display:none] lg:grid-cols-4 lg:gap-9 lg:px-30 md:grid md:grid-cols-3 md:gap-5"
       ref={containerRef}
     >
       {error ? (
@@ -102,7 +102,7 @@ export const Search = () => {
         })
       ) : (
         <>
-          <p className="col-span-2 text-white/80 text-lg mb-5 text-center">
+          <p className="col-span-2 lg:col-span-4 text-white/80 text-xl mb-5 text-center">
             Search result for : {gameName}
           </p>
           {games.map((game) => (

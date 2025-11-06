@@ -16,9 +16,9 @@ export default function Carousel({ data, index }) {
 
   return (
     <>
-      <div className=" rounded-md relative h-fit lg:h-full overflow-hidden ">
+      <div className=" rounded-md relative h-full w-full lg:h-fit overflow-hidden lg:mt-2 lg:pt-20 lg:px-30  lg:flex lg:justify-center gap-5 ">
         <div
-          className=" w-full object-cover h-100 mask"
+          className=" w-full object-cover h-[90%] mask lg:hidden"
           style={{
             backgroundImage: `url(${images[index] || mc})`,
             backgroundSize: "cover",
@@ -26,8 +26,18 @@ export default function Carousel({ data, index }) {
             transition: ".5s all linear",
           }}
         ></div>
+        <div
+          className="relative
+         hidden lg:block w-full object-cover h-[90%] lg:w-full lg:h-100  lg:rounded-xl lg:overflow-hidden p-4 bg-zinc-900/80 "
+        >
+          <img
+            src={`${images[index] || mc}`}
+            className="w-full h-full object-cover lg:rounded-xl"
+            alt=""
+          />
+        </div>
 
-        <div className="flex flex-col items-start inset-0 top-[75%] ml-6  ">
+        <div className="flex flex-col items-start inset-0 top-[75%] ml-6 lg:top-[60%]  lg:hidden">
           <p className="text-4xl text-white p-0 tracking-widest h-fit mb-1 w-full ">
             {names ? names[index] : "Minecraft"}
           </p>

@@ -10,6 +10,7 @@ app.use(express.json());
 
 // let redisClient = null;
 let isConnected = false;
+console.log(process.env.NEWS_API_KEY);
 
 const redisClient = createClient({
   username: "default",
@@ -100,11 +101,9 @@ app.get("/api/news", async (req, res) => {
   const date = new Date();
   date.setDate(date.getDate() - 2);
 
-  const url = `https://newsapi.org/v2/everything?" +
-    "q=Epic%20games&" +
-    "from=${date.toLocaleDateString("en-CA")}&" +
-    "sortBy=popularity&" +
-    "apiKey=${process.env.NEWS_API_KEY}`;
+  const url = `https://newsapi.org/v2/everything?q=Epic%20games&from=${date.toLocaleDateString(
+    "en-CA"
+  )}&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`;
 
   try {
     const _res = await axios.get(url);

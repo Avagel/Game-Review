@@ -28,7 +28,7 @@ export const GameCard = ({ gameData = [] }) => {
         alt=""
       />
       <p className="text-3sm mt-1 text-white">
-        {name?.length > 24 ? name.slice(0, 24) + "..." : name || "Sekiro"}
+        {name?.length > 24 ? name.slice(0, 20) + "..." : name || "Sekiro"}
       </p>
       <p className="text-xs px-1 bg-zinc-800 text-zinc-500 w-fit rounded-full">
         {gen || "Adventure"}

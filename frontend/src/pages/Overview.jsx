@@ -108,15 +108,15 @@ export const Overview = () => {
   ) : loading ? (
     <Loader />
   ) : (
-    <div className="h-screen overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none]">
-      <div className="relative flex items-center justify-center h-[45%] ">
+    <div className="h-screen overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none] z-4 relative">
+      <div className="lg:absolute lg:top-0 lg:w-full flex items-center justify-center  h-[45%] lg:h-fit">
         <img
-          className="absolute inset-0 h-full w-full object-cover blur-[10px] "
+          className="absolute inset-0 h-full w-full object-cover blur-[10px] lg:blur-[0px] brightness-50 mask lg:h-[330px]"
           src={gameData.background_image}
           alt=""
         />
 
-        <div className="w-[114px] h-[164px] bg-orange-500 z-1">
+        <div className="w-[114px] h-[164px] bg-zinc-800 z-1 lg:w-[220px] lg:h-[330px] rounded-md overflow-hidden lg:hidden ">
           <img
             className="w-full object-cover h-full shadow-[0_0px_14px_rgba(0,0,0)]"
             src={gameData.background_image}
@@ -124,47 +124,70 @@ export const Overview = () => {
           />
         </div>
       </div>
-      <div className="px-3 mt-5">
-        <p className=" text-3xl text-white mb-1">{gameData.name}</p>
-        <p className="flex items-center text-xs text-zinc-500">
-          <Star size={10} color="orange" />
-          4.0 | Mojang | Adventure
-        </p>
 
-        {/*      --------------------Genres---------------------         */}
-        <div className="mt-5 flex gap-3 w-full  overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none]">
-          {gameData.genres.map((genre, index) => {
-            const { name } = genre;
-            return (
-              <button className="text-xs px-5 rounded-full text-white py-1.5 bg-zinc-900 mt-4 border border-orange-500 tracking-widest ">
-                {" "}
-                {name}
-              </button>
-            );
-          })}
+      <div className="px-3 mt-5 lg:px-30 md:px-10">
+        <div className="  lg:flex lg:mt-30 gap-10 lg:items-center">
+          <div className="hidden lg:block w-[114px] h-[164px] bg-zinc-800 relative lg:w-[220px] lg:h-[330px] rounded-md overflow-hidden ">
+            <img
+              className="w-full object-cover h-full shadow-[0_0px_14px_rgba(0,0,0)]"
+              src={gameData.background_image}
+              alt=""
+            />
+          </div>
+
+          <div className="hidden lg:block">
+            <p className=" text-3xl text-white mb-1">{gameData.name}</p>
+            <p className="flex items-center text-xs text-zinc-500">
+              <Star size={10} color="orange" />
+              4.0 | Mojang | Adventure
+            </p>
+            {/*      --------------------Genres---------------------         */}
+            <div className="mt-5 flex gap-3 w-full  overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none]">
+              {gameData.genres.map((genre, index) => {
+                const { name } = genre;
+                return (
+                  <button className="text-xs px-5 rounded-full text-white py-1.5 bg-zinc-900 mt-4 border border-orange-500 tracking-widest ">
+                    {" "}
+                    {name}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <p className=" text-3xl text-white mb-1 lg:hidden">{gameData.name}</p>
+          <p className="flex items-center text-xs text-zinc-500 lg:hidden">
+            <Star size={10} color="orange" />
+            4.0 | Mojang | Adventure
+          </p>
+
+          {/*      --------------------Genres---------------------         */}
+          <div className="mt-5 flex gap-3 w-full  overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none] lg:hidden">
+            {gameData.genres.map((genre, index) => {
+              const { name } = genre;
+              return (
+                <button className="text-xs px-5 rounded-full text-white py-1.5 bg-zinc-900 mt-4 border border-orange-500 tracking-widest ">
+                  {" "}
+                  {name}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/*---------------About------------------ */}
 
-        <div
-          className="mt-10 relative transition-all duration-300"
-          style={{
-            overflow: "hidden",
-            height: isAboutOpen
-              ? `${aboutRef && aboutRef.current.offsetHeight + 40}px`
-              : "72px",
-          }}
-        >
-          <p className="text-md text-white mb-1 ">About</p>
+        <div className="hidden lg:block mt-10 relative transition-all duration-300 lg:h-fit lg:mt-20">
+          <p className="text-xl text-white mb-1 ">About</p>
 
-          <p className="text-sm text-zinc-500 " ref={aboutRef}>
+          <p className="text-lg text-zinc-500 " ref={aboutRef}>
             {gameData.description_raw || gameData.description}
           </p>
 
           {isAboutOpen ? (
             ""
           ) : (
-            <div className="absolute w-full inset-0 h-full bg-gradient-to-b from-transparent to-zinc-950"></div>
+            <div className="absolute w-full inset-0 h-full bg-gradient-to-b from-transparent to-zinc-950 lg:hidden"></div>
           )}
 
           <ChevronDown
@@ -177,25 +200,44 @@ export const Overview = () => {
             color="orange"
           />
         </div>
+        <div
+          className="mt-10 relative transition-all duration-300 lg:hidden"
+          style={{
+            overflow: "hidden",
+            height: isAboutOpen
+              ? `${aboutRef && aboutRef.current.offsetHeight + 40}px`
+              : "72px",
+          }}
+        >
+          <p className="text-sm text-zinc-500 " ref={aboutRef}>
+            {gameData.description_raw || gameData.description}
+          </p>
+
+          {isAboutOpen ? (
+            ""
+          ) : (
+            <div className="absolute w-full inset-0 h-full bg-gradient-to-b from-transparent to-zinc-950"></div>
+          )}
+        </div>
 
         {/*---------------Screenshots------------------ */}
 
         <div>
-          <p className="text-md text-white mb-5 mt-10">Screenshots</p>
+          <p className="text-xl text-white mb-5 mt-10 lg:mt-20 ">Screenshots</p>
           <div
-            className=" overflow-x-auto  snap-x snap-mandatory flex gap-4 [scrollbar-width:none] [-webkit-scrollbar:display:none]"
+            className=" overflow-x-auto  snap-x snap-mandatory flex gap-4 [scrollbar-width:none] [-webkit-scrollbar:display:none] lg:gap-6"
             ref={screenshotRef}
           >
             {gameData?.screenshots?.results.map((res) => {
               return (
                 <div
                   ref={screenshotCardRef}
-                  className="relative snap-start shrink-0 h-50 w-75 rounded-md overflow-hidden"
+                  className="relative snap-start shrink-0 h-50 w-75 lg:w-[500px] lg:h-[400px] rounded-md overflow-hidden"
                 >
                   <img
                     src={res.image}
                     alt=""
-                    className="aspect-331/222 lg:w-90 object-cover rounded-[30px] mb-4"
+                    className="aspect-331/222  object-cover rounded-[30px] "
                   />
                 </div>
               );
@@ -205,12 +247,12 @@ export const Overview = () => {
 
         {/*--------------------Tags------------------------ */}
 
-        <div className="mt-15">
-          <p className="text-md text-white mb-5  ">Tags</p>
+        <div className="mt-15 lg:mt-5">
+          <p className="text-xl text-white mb-5  ">Tags</p>
           <div className="flex gap-3 w-full  overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none]">
             {gameData.tags.map((item) => {
               return (
-                <button className="min-w-fit text-xs px-5 rounded-full text-white py-1.5 bg-zinc-900 border border-orange-500 tracking-widest ">
+                <button className="min-w-fit text-xs px-5 rounded-full text-white py-1.5 bg-zinc-900 border border-amber-500 tracking-widest ">
                   {" "}
                   {item.name}
                 </button>
@@ -220,8 +262,8 @@ export const Overview = () => {
         </div>
 
         {/*      --------------------Ratings---------------------         */}
-        <div className="mt-15">
-          <p className="text-md text-white mb-5  ">Rating</p>
+        <div className="mt-15 lg:mt-20">
+          <p className="text-lg text-white mb-5  ">Rating</p>
 
           <div className="flex gap-5">
             <div className="flex flex-col">
@@ -245,7 +287,7 @@ export const Overview = () => {
                 return (
                   <div className="flex items-center  gap-1 ">
                     <p className="text-xs text-zinc-500">{rate.id}</p>
-                    <div className="w-full bg-zinc-500 h-2 rounded-full">
+                    <div className="w-full lg:w-[500px] bg-zinc-500 h-2 rounded-full">
                       <div
                         style={{ width: `${rate.percent}%` }}
                         className="bg-orange-500 rounded-full h-full"
@@ -260,30 +302,32 @@ export const Overview = () => {
 
         {/*--------Additional Information------------------------- */}
 
-        <div className="my-15">
-          <p className="text-md text-white mb-5 ">Additional Information</p>
+        <div className="my-15 lg:my-25">
+          <p className="text-xl lg:text-xl text-white mb-5 ">
+            Additional Information
+          </p>
 
-          <div className="w-full h-50 bg-zinc-900 p-4 rounded-md grid grid-cols-3">
+          <div className="w-full h-50 bg-zinc-900 p-4 rounded-md grid grid-cols-3 ">
             <div>
-              <p className="text-zinc-300 flex items-center gap-1 text-xs">
+              <p className="text-zinc-300 flex items-center gap-1 text-xs lg:text-sm">
                 <Calendar size={10} color="orange" /> Release Date
               </p>
               <p className="text-zinc-500 text-xs">34/5/34</p>
             </div>
             <div>
-              <p className="text-zinc-300 flex items-center gap-1 mb- text-xs">
+              <p className="text-zinc-300 flex items-center gap-1 mb- text-xs lg:text-sm">
                 <Building size={10} color="orange" /> Company
               </p>
               <p className="text-zinc-500 text-xs">34/5/34</p>
             </div>
             <div>
-              <p className="text-zinc-300 flex items-center gap-1 text-xs">
+              <p className="text-zinc-300 flex items-center gap-1 text-xs lg:text-sm">
                 <Earth size={10} color="orange" /> Website
               </p>
               <p className="text-zinc-500 text-xs">34/5/34</p>
             </div>
             <div>
-              <p className="text-zinc-300 flex items-center gap-1 text-xs">
+              <p className="text-zinc-300 flex items-center gap-1 text-xs lg:text-sm">
                 <Laptop size={10} color="orange" /> Platforms
               </p>
               <p className="text-zinc-500 text-xs">34/5/34</p>
@@ -293,7 +337,7 @@ export const Overview = () => {
 
         {/*--------Similar Games------------------------- */}
         <div>
-          <p className="text-md text-white mb-5 ">Similar Games</p>
+          <p className="text-xl text-white mb-5 ">Similar Games</p>
 
           <div className="flex gap-3 overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none] mb-15">
             {similar.map((gameData, index) => {

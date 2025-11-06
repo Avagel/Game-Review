@@ -141,7 +141,7 @@ export const Browse = ({ games: _games, filter, setFilter }) => {
 
   return (
     <div
-      className=" relative h-full overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none]"
+      className=" relative z-4 h-full overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none]"
       ref={containerRef}
     >
       {filterMode ? (
