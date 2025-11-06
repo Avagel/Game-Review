@@ -27,7 +27,6 @@ import { fetchGames, fetchNews } from "./services/api";
 
 function App() {
   const apiUrl = import.meta.env.VITE_API_URL;
-  console.log("apiUrl", apiUrl);
   const {
     data: games,
     loading,

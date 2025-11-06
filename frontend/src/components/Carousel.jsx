@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { Star } from "lucide-react";
 
 export default function Carousel({ data, index }) {
-  console.log(data);
   const images = data?.map((item) => {
     return item.background_image;
   });

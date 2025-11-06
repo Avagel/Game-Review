@@ -42,7 +42,6 @@ export const Browse = ({ games: _games, filter, setFilter }) => {
   useEffect(() => {
     try {
       const { _filter } = location.state;
-      console.log(_filter);
       setFilter({
         developers: [],
         tags: [],

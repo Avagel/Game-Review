@@ -80,7 +80,7 @@ export const NavBarMain = () => {
           </button>
         </div>
       ) : (
-        <div className="h-12 w-[70%] rounded-3xl lg:rounded-none lg:bg-zinc-900/90 shadow-md bg-zinc-900/80  backdrop-blur-lg flex items-center justify-center gap-0  overflow-auto shrink-0 px-5 [scrollbar-width:none] [-webkit-scrollbar:display:none] transition-all duration-300 lg:w-full lg:justify-center lg:gap-6 ">
+        <div className="h-12 w-[70%] rounded-3xl lg:rounded-none lg:bg-zinc-900/90 shadow-md bg-zinc-900/80  backdrop-blur-lg flex items-center md:justify-center gap-0  overflow-auto shrink-0 px-5 [scrollbar-width:none] [-webkit-scrollbar:display:none] transition-all duration-300 lg:w-full lg:justify-center lg:gap-6 ">
           <button
             onClick={() => {
               navigate("/");

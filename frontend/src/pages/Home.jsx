@@ -25,7 +25,7 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
   });
 
   useEffect(() => {
-    console.log("render");
+    
     setTimeout(handleChange, 5000);
   }, []);
 
@@ -94,7 +94,6 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
         <div className="w-full z-1 rounded-xl h-fit  py-2.5 px-3 lg:bg-none mt-10">
           <div className="flex gap-3 overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none]">
             {games?.map((item) => {
-              console.log(item);
               return <GameCard gameData={item} />;
             })}
           </div>
