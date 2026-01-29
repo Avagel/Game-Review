@@ -13,24 +13,26 @@ export const GameCard = ({ gameData = [] }) => {
   return (
     <div
       className={`${
-        isBrowse || isSearch ? "" : "w-[190px] h-[300px]"
-      } aspect-190/300 p-2 bg-zinc-900/80 rounded-md hover:scale-90 transition-all duration-300`}
+        isBrowse || isSearch ? "" : "w-[190px] h-[330px] "
+      } game-card aspect-190/300 p-2 bg-zinc-800/80 rounded-md`}
       onClick={() => {
         navigate("/overview/" + name, {
           state: { gameID },
         });
       }}
     >
-      <img
-        loading="lazy"
-        src={background_image || sekiro}
-        className="rounded-md h-83/100 w-full object-cover"
-        alt=""
-      />
-      <p className="text-3sm mt-1 text-white">
+      <div className="rounded-md overflw-hidden h-83/100 max-h-83/100">
+        <img
+          loading="lazy"
+          src={background_image || sekiro}
+          className=" h-full w-full object-cover"
+          alt=""
+        />
+      </div>
+      <p className="text-3sm mt-3 text-white">
         {name?.length > 24 ? name.slice(0, 20) + "..." : name || "Sekiro"}
       </p>
-      <p className="text-xs px-1 bg-zinc-800 text-zinc-500 w-fit rounded-full">
+      <p className="text-xs mt-1 px-1.5 mb-4 bg-zinc-800 text-zinc-500 w-fit rounded-full">
         {gen || "Adventure"}
       </p>
     </div>

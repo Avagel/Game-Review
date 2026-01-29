@@ -3,18 +3,18 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 export const fetchGames = async (url) => {
   console.log("fetching games data ");
-  const res = await fetch(url, { method: "GET" });
-  const result = await res.json();
+  const res = await fetch(url);
+  const results = await res.json();
   if (!res.ok) {
-    throw new Error("unable to fetch games");
+    throw new Error("Unable to fetch news");
   }
-
-  return result.results;
+  return results.results;
 };
 
-export const fetchNews = async () => {
-  const res = await fetch(`${apiUrl}/api/news`);
+export const fetchNews = async (url) => {
+  const res = await fetch(url);
   const results = await res.json();
+  console.log("News results", results);
 
   if (!res.ok) {
     throw new Error("Unable to fetch news");

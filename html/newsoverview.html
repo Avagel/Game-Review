@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/all.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/newsOverview.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="navBar">
+        <div class="left-nav">MIMICK</div>
+        <div class="middle">
+            <a href="index.html">Home</a>
+            <a href="genre.html">Games</a>
+            <a href="about.html">About</a>
+            <a href="news.html" class="active">News</a>
+
+        </div>
+        <div class="right-nav">
+            <img src="../media/icons/Search.png" alt="">
+            <input type="text" placeholder="Search Games">
+        </div>
+    </div>
+    <div class="page">
+        <div class="pattern"></div>
+        <h2>Apex Legends Announces Cross-Play and Expansion to New Platforms</h2>
+        <div class="image"></div>
+        <div class="content">
+            Sony is enhancing its PlayStation esports efforts with a new series of live tournaments called PlayStation Tournaments: XP. The inaugural event will occur on January 18th, 2025, in London, featuring games such as Tekken 8, EA Sports FC 25, Fortnite, and Astro Bot. Players worldwide will compete representing teams named Triangle, Circle, Cross, and Square to earn points and battle for the championship and exclusive prizes. Open qualifiers for Fortnite begin on December 6th. The event will be live-streamed on PlayStation's Twitch and YouTube channels."
+        </div>
+
+    </div>
+    <footer>
+        <div class="logo">
+            <h2>Mimick</h2>
+        </div>
+        <div class="sections">
+            <section class="one">
+                <div class="about">
+                    <h3>About Us</h3>
+                    <h4>Bringing ratings to all games</h4>
+                </div>
+                <div class="contact">
+                    <h3>Contact us</h3>
+                    <span>09065446534</span>
+                    <span>akanumeiruoghenegmail.com</span>
+                </div>
+                
+            </section>
+            <section class="two">
+                <h3>Information</h3>
+                <a href="about.html">About Us</a>
+                <a href="index.html">Home</a>
+                <a href="genre.html">Games</a>
+                <a href="news.html">News</a>
+                
+            </section>
+            <section class="three">
+                <h3>Subscribe More Info</h3>
+                <input type="text" placeholder="Enter your Email">
+                <button class="but">subscribe</button>
+            </section>
+
+        </div>
+        <hr>
+
+        <div class="socials">
+            <i class="fa fa-linkedin"></i>
+            <i class="fa fa-facebook-square" aria-hidden="true"></i>
+            <i class="fa fa-github-square" aria-hidden="true"></i>
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+        
+        </div>
+
+    </footer>
+ 
+    <script>
+        let newsData = JSON.parse(localStorage.getItem
+        ("selectedNews"));
+        let image = document.querySelector(".image")
+        let header = document.querySelector(".page h2")
+        let content = document.querySelector(".content")
+        
+        image.style.backgroundImage = `url("../media/game images/${newsData[0]}/Big.jpg")` ;
+        
+        header.textContent = newsData[1]
+        content.textContent = newsData[2]
+
+
+    </script>
+
+    
+</body>
+</html>

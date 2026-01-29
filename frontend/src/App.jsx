@@ -26,18 +26,27 @@ import { useFetch } from "./services/useFetch";
 import { fetchGames, fetchNews } from "./services/api";
 
 function App() {
-  const apiUrl = import.meta.env.VITE_API_URL;
+  const gNewsApiKey = import.meta.env.VITE_GNEWS_API_KEY;
+  const rawgApiKey = import.meta.env.VITE_RAWG_API_KEY;
   const {
     data: games,
-    loading,
+    loading: gamesLoading,
     error,
-  } = useFetch(() => fetchGames(`${apiUrl}/api/games/5`));
+  } = useFetch(() =>
+    fetchGames(
+      `https://api.rawg.io/api/games?key=${rawgApiKey}&page=${5}&ordering = rating`,
+    ),
+  );
 
   const {
     data: news,
     loading: newsLoading,
     error: newsError,
-  } = useFetch(() => fetchNews(`${apiUrl}/api/news`));
+  } = useFetch(() =>
+    fetchNews(
+      `https://gnews.io/api/v4/search?q=gaming&lang=en&max=5&apikey=${gNewsApiKey}`,
+    ),
+  );
 
   // const [news, setNews] = useState([]);
   const [BrowseFilter, setBrowseFilter] = useState();
@@ -55,7 +64,7 @@ function App() {
                   news={news}
                   games={games}
                   error={error}
-                  loading={loading}
+                  gamesLoading={gamesLoading}
                   newsLoading={newsLoading}
                 />
               }

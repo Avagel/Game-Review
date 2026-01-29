@@ -1,0 +1,182 @@
+.page{
+    margin-top: 8%;
+    display: flex;
+    gap: 40px;
+    position: relative;
+    overflow: hidden;
+    padding-left: var(--margin);
+}
+body{
+    overflow: hidden scroll;
+}
+
+.content{
+    box-sizing: border-box;
+    width: 67%;
+    margin-top: 20px;
+    height: 85%;
+    overflow-y: scroll;
+    
+    h2{
+        text-align: center;
+        display: none;
+    
+    }
+}
+.content::-webkit-scrollbar{
+    display: none;
+}
+.content .image{
+    width:  100%;
+    height: 60%;
+    background-image: url("../media/game images/Mortal Kombat/Big.jpg");
+    background-size: cover;
+    margin-bottom: 60px;
+    position: relative;
+    
+}
+
+.image .fade {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    background-image: url("../media/images/fade\ news.png");
+    background-size: cover;
+    background-position: center;
+    
+}
+
+
+h3{
+    font-size: .8rem;
+    width: 260px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+
+.news-content h3{
+    margin-top: 10px;
+    width: 100%;
+    height: 3.3rem;
+    overflow: hidden;
+    text-wrap: wrap;
+}
+
+.events{
+    height: 67%;
+    width: 20%;
+    box-sizing: border-box;
+    overflow:hidden;
+    position: relative;
+   
+} 
+
+
+.similar{
+    
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-family: popBlack;
+}
+
+
+.event-card{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    transition: .2s all;
+    
+}
+
+.event-card h3{
+    margin: 0;
+    font-size: 1rem;
+    height: 50px;
+    overflow: hidden;
+    width: 100%;
+}
+
+
+ .event-card img{
+    height: 55px;
+    border-radius: 6px;
+    width: 65px;
+    margin-right: 10px ;
+    object-fit: cover;
+}
+
+
+.event-card:hover img{
+    filter: brightness(.5);
+}
+.event-card:hover h3{
+    text-decoration: underline;
+   
+}
+
+.cards .event-card{
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.233);
+}
+
+.cards .event-card img{
+    border-radius: 6px;
+    width: 220px;
+    height: 124px;
+}
+
+@media (max-width: 768px) {
+    .page{
+        flex-direction: column;
+        align-items: center;
+        padding-left: 0;
+    }
+    .content{
+        width: 100%;
+        height: 100%;
+
+        .image{
+            height: 40%;
+        }
+        h2{
+            display: block;
+        }
+    }
+
+    .events{
+        display: none;
+    }
+    .cards{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .event-card{
+        width: 90%;
+    }
+    .event-card img{
+        width: 30%;
+        height: 50px;
+    }
+    .event-card h3{
+        font-size: 0.8rem;
+    }
+    .event-card:hover img{
+        filter: brightness(.5);
+    }
+    .event-card:hover h3{
+        text-decoration: underline;
+    }
+   
+  }
+  

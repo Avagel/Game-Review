@@ -1,11 +1,19 @@
 import { Outlet } from "react-router";
 import grid from "../assets/grid.png";
 import { NavBarMain } from "../components/NavBarMain";
+import first from "../assets/bg first.jpg";
 
 export const Layout = () => {
   return (
     <>
-      <div className="layout  w-full relative bg-cover bg-center bg-zinc-950 h-screen overflow-y-auto [scrollbar-width:none] [-webkit-scrollbar:display:none]">
+      <div
+        className="  w-full relative bg-cover bg-center bg-zinc-950 min-h-[100dvh] pb-[env(safe-area-inset-bottom)] overflow-hidden page"
+        style={{
+          // backgroundImage: `url(${first})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
         <NavBarMain />
 
         <Outlet />

@@ -1,0 +1,38 @@
+.page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    margin-top: 8%;
+}
+
+.slider{
+    width: 70%;
+    height: 400px;
+    background-image: url("../media/game images/Mortal Kombat/Big.jpeg");
+    background-size: cover;
+    background-position: center;
+}
+.page .content{
+    width: 70%;
+
+}
+.page h3{
+    font-size: 1rem;
+}
+strong{
+    font-family: PopBlack;
+    color: var(--plain-color);
+}
+@media (max-width: 768px) {
+    .slider{
+        width: 100%;
+        height: 300px;
+    }
+    .page{
+        margin-top: 80px;
+    }
+    .page h3{
+        font-size: 0.8rem;
+    }
+}

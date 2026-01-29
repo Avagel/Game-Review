@@ -9,6 +9,27 @@
 .mask-about {
   mask: linear-gradient(white, transparent 80%);
 }
+* {
+  transition: 0.3s all;
+}
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+.game-card:hover img {
+  transform: scale(1.05);
+  transition: 0.5s all;
+}
+.news-card a:hover {
+  background: transparent;
+  color: white;
+  border: 0.5px solid orange;
+}
+
+.news-card:hover img {
+  transform: scale(1.05);
+  transition: 0.5s all;
+}
 
 @keyframes loading {
   from {

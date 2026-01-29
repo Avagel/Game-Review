@@ -16,7 +16,7 @@ export const NavBar = ({ getText, closeMenu }) => {
 
   return (
     <div
-      className="bg-zinc-950  w-full absolute top-full transition-all duration-300 text-sm font-medium flex flex-col gap-2 items-center py-3"
+      className="bg-zinc-950  w-full absolute top-full transition-all duration-300 text-sm  font-medium flex flex-col gap-2 items-center py-3"
       style={{ height }}
     >
       <NavLink

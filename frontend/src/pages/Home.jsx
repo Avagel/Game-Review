@@ -1,7 +1,7 @@
 import { GameCard } from "../components/GameCard";
 import { NewsCardII } from "../components/NewsCardII";
 import { useEffect, useState } from "react";
-import Carousel from "../components/Carousel";
+import { Carousel } from "flowbite-react";
 import { NavLink, useNavigate } from "react-router";
 import apex from "../assets/apexs.png";
 import kratos from "../assets/kratos.png";
@@ -14,8 +14,9 @@ import sadtear from "../assets/sadtear.svg";
 
 import grid from "../assets/grid.png";
 import { fetchGames } from "../services/api";
+import CarouselItem from "../components/CarouselItem";
 
-export const Home = ({ games, loading, error, news, newsLoading }) => {
+export const Home = ({ games, gamesLoading, error, news, newsLoading }) => {
   const navigate = useNavigate();
 
   // const [error, setError] = useState(null);
@@ -25,7 +26,6 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
   });
 
   useEffect(() => {
-    
     setTimeout(handleChange, 5000);
   }, []);
 
@@ -38,6 +38,7 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
     });
     setTimeout(handleChange, 5000);
   };
+  console.log(games);
 
   return error ? (
     <div className="absolute w-full h-full flex flex-col items-center justify-center z-4">
@@ -56,16 +57,11 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
         Refresh{" "}
       </NavLink>
     </div>
-  ) : loading ? (
+  ) : gamesLoading ? (
     <Loader />
   ) : (
-    <div className="h-screen   tracking-wider overflow-x-hidden  overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none] px-2 relative pb-30 z-4 ">
-      <img
-        className="absolute blur-[120px] top-25 right-[40%] rounded-md z-0 h-70/100 lg:h-full overflow-hidden opacity-50 lg:opacity-10"
-        src={images[index]}
-        alt=""
-      />
-      <div className="h-fit w-full  pt-30 pb-10 flex flex-col items-center gap-5 lg:pb-0 ">
+    <div className="h-screen  flex flex-col items-center  tracking-wider overflow-x-hidden  overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none] px-2 relative pb-30 z-4 ">
+      <div className="h-fi lg:hidden w-full my-16 pt-30 pb-10  lg:flex-col items-center gap-5 lg:pb-0 lg:w-[1000px]">
         <p className="text-white/80 text-center text-5xl w-fit tracking-widest">
           Play, <br /> Review, <br />
           Repeat.
@@ -75,15 +71,20 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
           trending releases.
         </p>
       </div>
-      <Carousel data={games.slice(0, 6)} index={index} />
+
+      {/*--------------Carousel------------------ */}
+      <Carousel
+        className="hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:block lg:w-3/4 h-4/4  my-16 "
+        onSlideChange={(index) => console.log("onSlideChange()", index)}
+      >
+        {games.slice(0, 6).map((game) => {
+          return <CarouselItem data={game} />;
+        })}
+      </Carousel>
+
       {/*--------------Trending Gems------------------ */}
 
-      <div className="relative mt-25 lg:px-30">
-        <img
-          className="absolute blur-[120px] top-25 left-[80%] rounded-md z-0 h-70/100 lg:h-full overflow-hidden opacity-50 lg:opacity-10"
-          src={images[index]}
-          alt=""
-        />
+      <div className="relative my-16   lg:w-[1000px]">
         <p className="text-xl lg:text-xl text-white text-center mb-1">
           Trending Games
         </p>
@@ -91,8 +92,8 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
           What everyone’s playing right now
         </p>
 
-        <div className="w-full z-1 rounded-xl h-fit  py-2.5 px-3 lg:bg-none mt-10">
-          <div className="flex gap-3 overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none]">
+        <div className="w-full z-1 rounded-xl h-fit lg:bg-none mt-10">
+          <div className="flex gap-3 overflow-auto  p-5 [scrollbar-width:none] [-webkit-scrollbar:display:none] ">
             {games?.map((item) => {
               return <GameCard gameData={item} />;
             })}
@@ -101,12 +102,7 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
       </div>
 
       {/*-------------Popular Genres--------------*/}
-      <div className="h-fit relative pb-3 w-full  mt-25 rounded-md  lg:flex lg:items-center lg:flex-col">
-        <img
-          className="absolute blur-[120px] top-25 right-[40%] rounded-md z-0 h-70/100 lg:h-full overflow-hidden opacity-50 lg:opacity-10"
-          src={images[index]}
-          alt=""
-        />
+      <div className="h-fit relative w-full px-30 lg:px-0  my-16 rounded-md  lg:flex lg:items-center lg:flex-col   lg:w-[1000px]">
         <p className="text-xl lg:text-xl text-white text-center mb-1">
           Popular Genres
         </p>
@@ -114,9 +110,9 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
           Discover what genres are shaping the future
         </p>
 
-        <div className="flex flex-row lg:flex-row lg:w-full h-70  gap-3 px-3 mt-10 overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none] lg:h-fit lg:flex-wrap lg:px-30 lg:justify-center lg:gap-5">
+        <div className="flex flex-row lg:flex-row lg:w-full h-70  gap-3 mt-10 overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none] lg:h-fit   lg:justify-start lg:gap-5 maskr">
           {/* Item*/}
-          <div className=" relative shrink-0 w-full lg:w-100 md:w-100    h-60 rounded-3xl overflow-hidden border border-orange-500">
+          <div className=" relative shrink-0 w-full lg:w-100 md:w-100 h-60 rounded-3xl overflow-hidden border border-orange-500">
             <img
               className="w-full h-full object-cover absolute inset-0 opacity-15 z-0"
               src={grid}
@@ -223,13 +219,7 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
         </div>
       </div>
 
-      <div className="relative mt-25">
-        <img
-          className="absolute blur-[120px] top-25 right-[40%] rounded-md z-0 h-70/100 lg:h-full overflow-hidden opacity-50"
-          src={images[index]}
-          alt=""
-        />
-
+      <div className="relative my-16  lg:w-[1000px]">
         <p className="text-xl lg:text-xl text-white text-center mb-1">
           Game Quiz
         </p>
@@ -262,12 +252,7 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
 
       {/*-------------------NEWS---------------------*/}
 
-      <div className="relative mt-25">
-        <img
-          className="absolute blur-[120px] top-25 right-[90%] rounded-md z-0 h-70/100 lg:h-full overflow-hidden opacity-30"
-          src={images[index]}
-          alt=""
-        />
+      <div className="relative my-16 lg:w-[1000px]">
         <div className="flex flex-col items-center z-3">
           <p className="text-xl lg:text-xl text-white text-center mb-1">
             Latest News
@@ -276,7 +261,7 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
             From reveals to rumors — get the inside story first.
           </p>
 
-          <div className="flex flex-col px-3 gap-15 mb-10 lg:grid lg:grid-cols-3 md:grid md:grid-cols-2 lg:px-30 ">
+          <div className="flex flex-col px-3 gap-3 mb-5 lg:grid lg:grid-cols-3 md:grid md:grid-cols-2  ">
             {newsLoading
               ? "loading articles..."
               : news.slice(0, 3).map((article, index) => {
@@ -298,7 +283,7 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
         </div>
       </div>
       {/*---------------Random Games---------------------*/}
-      <div className="relative mt-25 lg:px-30">
+      <div className="relative my-16  lg:w-[1000px]">
         <p className="text-xl lg:text-xl text-white text-center mb-1">
           Random Games
         </p>
@@ -306,7 +291,7 @@ export const Home = ({ games, loading, error, news, newsLoading }) => {
           Feeling lucky today?
         </p>
 
-        <div className="w-full rounded-xl h-fit  py-2.5 px-3 lg:bg-none mt-10 ">
+        <div className="w-full rounded-xl h-fit  mt-10 ">
           <div className="flex gap-3 overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none]">
             {games?.map((item) => {
               return <GameCard gameData={item} />;

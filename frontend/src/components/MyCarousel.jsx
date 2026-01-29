@@ -4,8 +4,11 @@ import mc from "../assets/mc.jpg";
 import apex from "../assets/apex.jpg";
 import { useEffect } from "react";
 import { Star } from "lucide-react";
+import CarouselItem from "./CarouselItem";
+import { Carousel } from "flowbite-react";
 
-export default function Carousel({ data, index }) {
+export default function MyCarousel({ data, index }) {
+  console.log("Carousel data:", data);
   const images = data?.map((item) => {
     return item.background_image;
   });
@@ -15,7 +18,17 @@ export default function Carousel({ data, index }) {
 
   return (
     <>
-      <div className=" rounded-md relative h-full w-full lg:h-fit overflow-hidden lg:mt-2 lg:pt-20 lg:px-30  lg:flex lg:justify-center gap-5 ">
+      <div className="hidden  md:block lg:block w-full mt-10 h-130  rounded-3xl relative overflow-hidden">
+        <Carousel
+          className="[scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          onSlideChange={(index) => console.log("onSlideChange()", index)}
+        >
+          {data.map((project, index) => {
+            return <CarouselItem data={project} />;
+          })}
+        </Carousel>
+      </div>
+      {/* <div className=" rounded-md relative h-full w-full lg:h-fit overflow-hidden lg:mt-2 lg:pt-20 lg:px-30  lg:flex lg:justify-center gap-5 ">
         <div
           className=" w-full object-cover h-[70%] mask lg:hidden"
           style={{
@@ -51,7 +64,7 @@ export default function Carousel({ data, index }) {
           </div>
           <p className="text-xs text-orange-500">See Details</p>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

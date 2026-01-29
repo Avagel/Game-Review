@@ -232,7 +232,7 @@ export const Overview = () => {
               return (
                 <div
                   ref={screenshotCardRef}
-                  className="relative snap-start shrink-0 h-50 w-75 lg:w-[500px] lg:h-[400px] rounded-md overflow-hidden"
+                  className="relative snap-start shrink-0 h-50 w-75 lg:w-[400px] lg:h-[300px] rounded-md overflow-hidden"
                 >
                   <img
                     src={res.image}

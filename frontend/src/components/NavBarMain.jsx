@@ -90,7 +90,7 @@ export const NavBarMain = () => {
             } `}
           >
             <House size={15} className="lg:hidden" />
-            <p className="lg:text-sm text-xs tracking-wide lg:block hover:te">
+            <p className="lg:text-lg text-xs tracking-wide lg:block hover:te">
               Home
             </p>
           </button>
@@ -104,7 +104,7 @@ export const NavBarMain = () => {
             } `}
           >
             <Compass size={15} className="shrink-0 lg:hidden" />
-            <p className="text-xs lg:text-sm tracking-wide lg:block">
+            <p className="text-xs lg:text-lg tracking-wide lg:block">
               Discover
             </p>
           </button>
@@ -116,7 +116,7 @@ export const NavBarMain = () => {
             className={`w-12 h-10 rounded-full shrink-0 hover:text-amber-500  items-center mr-3 justify-center flex flex-col text-white/80 `}
           >
             <Search size={15} className="shrink-0 lg:hidden" />
-            <p className="text-xs lg:text-sm  tracking-wide lg:block">Search</p>
+            <p className="text-xs lg:text-lg  tracking-wide lg:block">Search</p>
           </button>
 
           <button
@@ -128,7 +128,7 @@ export const NavBarMain = () => {
             } `}
           >
             <Earth size={15} className="lg:hidden" />
-            <p className="text-xs lg:text-sm  tracking-wide lg:block">News</p>
+            <p className="text-xs lg:text-lg  tracking-wide lg:block">News</p>
           </button>
         </div>
       )}

@@ -6,10 +6,13 @@ export const useFetch = (func) => {
   const [data, setData] = useState(null);
 
   const fetchData = async () => {
+    console.log("Fetching data...");
     try {
       setLoading(true);
 
+      console.log("Func", func);
       const data = await func();
+      console.log("Data", data);
       setData(data);
     } catch (error) {
       console.log("error", error);
@@ -19,7 +22,7 @@ export const useFetch = (func) => {
     }
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     fetchData();
   }, []);
 

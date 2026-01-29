@@ -1,0 +1,558 @@
+let data = [
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b03",
+    },
+    name: "Apex Legends",
+    description:
+      'Apex Legends is a free-to-play battle royale hero shooter developed by Respawn Entertainment. Players compete in squads of three or duos, selecting from a roster of unique "Legends," each with special abilities. The game features fast-paced movement, advanced gunplay, and a revolutionary ping system for communication. With regular seasonal updates introducing new Legends, weapons, and maps, Apex Legends continues to be a top contender in the battle royale genre.',
+    genre: "Shooter",
+    platform: [1, 1, 1],
+    comments: [
+      ["Great movement mechanics!"],
+      ["Needs better server stability."],
+      ["New legends keep the meta fresh."],
+      ["Ranked mode feels unbalanced."],
+      ["The map rotations are a nice touch."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b04",
+    },
+    name: "Fortnite",
+    description:
+      "Fortnite is a massively popular battle royale game developed by Epic Games. Players drop onto an island and fight to be the last one standing while utilizing unique building mechanics to create cover, gain high ground, and strategize against opponents. The game is known for its constant updates, live events, and collaborations with popular franchises, keeping the experience fresh. It also includes a creative mode where players can design their own maps and game modes.",
+    genre: "Shooter",
+    platform: [1, 1, 1],
+    comments: [
+      ["Building adds a unique skill gap."],
+      ["Collabs with other franchises are amazing."],
+      ["Zero Build mode was a great addition."],
+      ["Sometimes too many updates change the meta."],
+      ["Weapon balancing can be inconsistent."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b05",
+    },
+    name: "Halo",
+    description:
+      "Halo is a legendary first-person shooter franchise developed by Bungie and later 343 Industries. It follows the story of Master Chief, a supersoldier fighting against alien factions such as the Covenant and the Flood. The series is known for its gripping campaign, expansive lore, and tight multiplayer gameplay that has defined console shooters for decades. Halo Infinite, the latest installment, brings open-world exploration and a refined multiplayer experience.",
+    genre: "Shooter",
+    platform: [0, 1, 1],
+    comments: [
+      ["Classic shooter with amazing lore."],
+      ["Multiplayer used to be the best in the genre."],
+      ["Needs more content updates."],
+      ["Campaigns are always epic."],
+      ["The Forge mode is a game-changer."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b06",
+    },
+    name: "Marvel Rivals",
+    description:
+      "Marvel Rivals is an upcoming hero-based shooter that pits Marvel's iconic characters against each other in fast-paced, team-based battles. Developed by NetEase, the game blends Overwatch-style abilities with destructible environments and cooperative mechanics. Players can choose from a roster of heroes and villains, each bringing unique superpowers and playstyles, making for dynamic and action-packed matches.",
+    genre: "Shooter",
+    platform: [1, 1, 1],
+    comments: [
+      ["Excited to see how hero abilities work."],
+      ["Needs a strong roster of characters."],
+      ["Hope the balancing is good."],
+      ["Destructible environments sound fun."],
+      ["Could compete with Overwatch."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b07",
+    },
+    name: "Minecraft",
+    description:
+      "Minecraft is an open-world sandbox game developed by Mojang. It allows players to explore, gather resources, craft tools, and build anything imaginable. With survival and creative modes, the game appeals to both casual builders and hardcore adventurers. Minecraft features a near-infinite world filled with biomes, dungeons, and creatures, fostering creativity and exploration. Its multiplayer aspect allows for collaboration, minigames, and massive community-driven projects.",
+    genre: "Survival",
+    platform: [1, 1, 1],
+    comments: [
+      ["Endless creativity with building."],
+      ["Redstone allows for insane contraptions."],
+      ["Updates keep the game fresh."],
+      ["Multiplayer servers make it even better."],
+      ["The soundtrack is incredibly nostalgic."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b08",
+    },
+    name: "Rust",
+    description:
+      "Rust is a hardcore survival game where players start with nothing and must gather resources, craft weapons, and build shelters while fending off other players and environmental threats. Developed by Facepunch Studios, the game features brutal PvP mechanics, base-building, and a deep crafting system. The constant risk of losing progress due to raids and encounters makes Rust one of the most intense survival experiences out there.",
+    genre: "Survival",
+    platform: [1, 1, 1],
+    comments: [
+      ["One of the most brutal survival games."],
+      ["PvP can be really unforgiving."],
+      ["Raiding bases is super satisfying."],
+      ["Teamwork is key to surviving."],
+      ["The community can be very toxic."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b09",
+    },
+    name: "Terraria",
+    description:
+      "Terraria is a 2D sandbox adventure game with exploration, crafting, building, and combat mechanics. Developed by Re-Logic, it features randomly generated worlds filled with treasures, enemies, and bosses. Players can dig deep underground, create intricate structures, and battle powerful foes in an ever-expanding world. Often compared to Minecraft but with a stronger focus on combat and progression, Terraria is beloved for its depth and replayability.",
+    genre: "Survival",
+    platform: [1, 1, 1],
+    comments: [
+      ["Feels like 2D Minecraft but with better combat."],
+      ["Boss fights are challenging and fun."],
+      ["So much content for a pixel game."],
+      ["Building is just as good as in Minecraft."],
+      ["The soundtrack is underrated."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b0a",
+    },
+    name: "Elden Ring",
+    description:
+      "Elden Ring is an open-world action RPG developed by FromSoftware, blending Souls-like mechanics with expansive exploration. Players traverse the Lands Between, battling formidable enemies, discovering hidden dungeons, and uncovering a rich, mysterious lore. With deep character customization, challenging combat, and a vast world co-created by George R.R. Martin, Elden Ring has been praised as one of the greatest action RPGs of all time.",
+    genre: "RPG",
+    platform: [1, 1, 1],
+    comments: [
+      ["Boss fights are incredibly well-designed."],
+      ["Exploration feels rewarding."],
+      ["Some areas have frustrating enemy spam."],
+      ["The lore is deep and intriguing."],
+      ["Magic builds feel a bit overpowered."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b0b",
+    },
+    name: "Black Myth Wukong",
+    description:
+      "Black Myth: Wukong is an upcoming action RPG inspired by the classic Chinese novel Journey to the West. Developed by Game Science, the game features fluid Souls-like combat, mythological creatures, and stunning visuals powered by Unreal Engine 5. Players control the Monkey King as he battles powerful foes using a variety of magical transformations and martial arts techniques.",
+    genre: "RPG",
+    platform: [1, 1, 1],
+    comments: [
+      ["The visuals are stunning!"],
+      ["Excited to see more gameplay."],
+      ["Combat looks fluid and dynamic."],
+      ["Hope the story is well-developed."],
+      ["The mythological creatures look amazing."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b0c",
+    },
+    name: "Roblox",
+    description:
+      "Roblox is an online platform that allows users to create, share, and play games made by the community. With millions of user-generated games ranging from simulators to FPS battles, Roblox offers endless variety. The game’s social features, customization, and cross-platform support make it a global sensation, especially among younger audiences.",
+    genre: "RPG",
+    platform: [1, 1, 1],
+    comments: [
+      ["So many different games to play."],
+      ["User-generated content makes it unique."],
+      ["Some games have pay-to-win mechanics."],
+      ["Great for creative minds."],
+      ["The community is very diverse."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b0d",
+    },
+    name: "God of war",
+    description:
+      "God of War follows Kratos, a former Greek god, on a journey of vengeance and redemption. The latest entries in the series shift to Norse mythology, focusing on his relationship with his son, Atreus. Developed by Santa Monica Studio, the game blends brutal combat with emotional storytelling, earning widespread acclaim for its deep narrative and fluid gameplay.",
+    genre: "Adventure",
+    platform: [1, 1, 0],
+    comments: [
+      ["Kratos' character development is incredible."],
+      ["Combat feels weighty and satisfying."],
+      ["The Norse mythology setting is amazing."],
+      ["Father-son dynamic adds emotional depth."],
+      ["Boss fights are epic."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b0e",
+    },
+    name: "Spider-Man",
+    description:
+      "Spider-Man is an open-world superhero game developed by Insomniac Games. It lets players swing through New York City as Peter Parker, battling classic villains, solving crimes, and uncovering a gripping story. The game’s fluid traversal system, engaging combat, and deep character development make it one of the best superhero games ever created.",
+    genre: "Adventure",
+    platform: [1, 1, 0],
+    comments: [
+      ["Swinging through NYC is so much fun."],
+      ["The combat is smooth and fluid."],
+      ["Villains are well-designed."],
+      ["Side missions feel meaningful."],
+      ["The story is emotional and engaging."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b0f",
+    },
+    name: "Red Dead Redemption",
+    description:
+      "Red Dead Redemption is an open-world action-adventure series set in the Wild West, developed by Rockstar Games. Players step into the boots of outlaws like John Marston and Arthur Morgan, navigating an immersive world filled with dynamic encounters, stunning landscapes, and morally complex choices. The game’s rich storytelling and detailed world-building have made it a classic.",
+    genre: "Adventure",
+    platform: [1, 1, 1],
+    comments: [
+      ["Incredible open-world detail."],
+      ["Arthur Morgan is one of the best protagonists."],
+      ["The story is heart-wrenching."],
+      ["Gunplay feels authentic."],
+      ["Hunting and survival mechanics are deep."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b10",
+    },
+    name: "The Witcher",
+    description:
+      "The Witcher is an action RPG series based on the novels by Andrzej Sapkowski. Players control Geralt of Rivia, a monster hunter navigating a morally gray world filled with magic, political intrigue, and terrifying creatures. The Witcher 3: Wild Hunt is particularly praised for its deep storytelling, vast open world, and meaningful choices.",
+    genre: "Adventure",
+    platform: [1, 1, 1],
+    comments: [
+      ["Geralt is such a well-written character."],
+      ["Side quests feel like main quests."],
+      ["Combat is engaging but takes time to master."],
+      ["The open world feels alive."],
+      ["The DLCs are better than some full games."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b11",
+    },
+    name: "The Last Of Us",
+    description:
+      "The Last of Us is a cinematic action-adventure game developed by Naughty Dog, following Joel and Ellie as they struggle to survive in a post-apocalyptic world overrun by a fungal infection. The game is known for its emotional storytelling, realistic characters, and intense stealth-based combat. Its sequel, The Last of Us Part II, continues the story with even greater depth and complexity.",
+    genre: "Adventure",
+    platform: [1, 1, 0],
+    comments: [
+      ["One of the best stories in gaming."],
+      ["Emotional moments hit hard."],
+      ["Stealth gameplay is well-executed."],
+      ["Combat is brutal and realistic."],
+      ["The soundtrack adds to the atmosphere."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b12",
+    },
+    name: "Assassins Creed",
+    description:
+      "Assassin's Creed is a historical action-adventure series developed by Ubisoft. It follows the conflict between Assassins and Templars across various time periods, featuring parkour, stealth, and open-world exploration. Each game immerses players in a different historical setting, from Renaissance Italy to Ancient Egypt and Viking-era England.",
+    genre: "Adventure",
+    platform: [1, 1, 1],
+    comments: [
+      ["Parkour is a signature feature."],
+      ["Historical settings are well-researched."],
+      ["The series has changed a lot over the years."],
+      ["Stealth gameplay is satisfying."],
+      ["Some games are too big for their own good."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b13",
+    },
+    name: "Mortal Kombat",
+    description:
+      "Mortal Kombat is a legendary fighting game franchise known for its brutal combat, iconic characters, and over-the-top fatalities. Developed by NetherRealm Studios, the series has evolved with deep mechanics, cinematic storylines, and intense competitive play. Mortal Kombat continues to push the boundaries of fighting games with its detailed animations and engaging gameplay.",
+    genre: "Fighting",
+    platform: [1, 1, 1],
+    comments: [
+      ["Fatalities are brutal and satisfying."],
+      ["Story mode is surprisingly deep."],
+      ["Online matchmaking can be hit or miss."],
+      ["Character designs are top-tier."],
+      ["Needs more guest characters!"],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b14",
+    },
+    name: "Naruto (Storm Series)",
+    description:
+      "Naruto games, particularly the Naruto: Ultimate Ninja Storm series, bring the world of the beloved anime to life through fast-paced arena battles. Players control their favorite ninjas, performing flashy jutsus and ultimate moves in beautifully animated fights that stay true to the source material.",
+    genre: "Fighting",
+    platform: [1, 1, 1],
+    comments: [
+      ["Ultimate Jutsus look amazing."],
+      ["Combat is simple but fun."],
+      ["Story mode follows the anime well."],
+      ["Character variety is great."],
+      ["Needs more balanced online play."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b15",
+    },
+    name: "Tekken",
+    description:
+      "Tekken is a popular 3D fighting game series developed by Bandai Namco. It features deep combat mechanics, diverse characters, and a strong competitive scene. With its mix of martial arts styles and an ongoing story about the Mishima family feud, Tekken remains a favorite among fighting game enthusiasts.",
+    genre: "Fighting",
+    platform: [1, 1, 1],
+    comments: [
+      ["The most technical fighting game out there."],
+      ["Juggles and combos take skill to master."],
+      ["The Mishima story is legendary."],
+      ["Each character has a unique playstyle."],
+      ["Online play can be laggy sometimes."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b16",
+    },
+    name: "Street Fighter",
+    description:
+      "Street Fighter is one of the most influential fighting game franchises, developed by Capcom. Known for its iconic characters like Ryu, Chun-Li, and Ken, it features precise inputs, special moves, and competitive depth. Street Fighter is a staple in esports and continues to evolve with new mechanics and refined gameplay.",
+    genre: "Fighting",
+    platform: [1, 1, 0],
+    comments: [
+      ["Parries and special moves feel great."],
+      ["Competitive scene is huge."],
+      ["Some characters are too strong."],
+      ["Classic arcade-style gameplay."],
+      ["Needs more single-player content."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cba6662df5250fe6b17",
+    },
+    name: "EA FC",
+    description:
+      "EA FC is the premier football simulation series, now rebranded as EA Sports FC after FIFA’s license ended. The game offers realistic football gameplay, featuring official teams, leagues, and players, along with various modes like Career Mode, Ultimate Team, and Pro Clubs.",
+    genre: "Sports",
+    platform: [1, 1, 1],
+    comments: [
+      ["Rebranded FIFA with some gameplay tweaks."],
+      ["Dribbling feels smoother than before."],
+      ["Ultimate Team remains the core focus."],
+      ["Defensive mechanics are more balanced."],
+      ["Still needs better Career Mode improvements."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cbb6662df5250fe6b18",
+    },
+    name: "FIFA",
+    description:
+      "FIFA (now rebranded as EA Sports FC) is a football simulation game developed by EA Sports. It features realistic gameplay, official teams, leagues, and players from around the world, including top competitions like the Premier League, La Liga, and UEFA Champions League. The game includes multiple modes such as Career Mode, where players manage a club or player’s career, and Ultimate Team, which allows users to build squads with cards and compete online. With advanced graphics, realistic ball physics, and fluid animations, FIFA has been the go-to football game for years, offering an immersive experience for casual players and competitive gamers alike.",
+    genre: "Sports",
+    platform: [1, 1, 1],
+    comments: [
+      ["Classic football game that defined the genre."],
+      ["Career Mode has been a fan favorite for years."],
+      ["Ultimate Team became the most popular mode."],
+      ["FIFA Street modes were a great addition."],
+      ["The licensing makes it feel like real football."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cbb6662df5250fe6b19",
+    },
+    name: "Forza",
+    description:
+      "Forza is a top-tier racing franchise developed by Turn 10 Studios and Playground Games. Forza Motorsport focuses on realistic track racing, while Forza Horizon delivers an open-world arcade-style experience with stunning visuals, diverse environments, and a massive collection of cars.",
+    genre: "Sports",
+    platform: [0, 1, 1],
+    comments: [
+      ["Best racing game for car enthusiasts."],
+      ["Open-world exploration is fun."],
+      ["The graphics are stunning."],
+      ["Huge variety of cars."],
+      ["Handling feels realistic."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cbb6662df5250fe6b1a",
+    },
+    name: "WWE",
+    description:
+      "WWE games bring professional wrestling to life with realistic gameplay, a vast roster of superstars, and deep customization options. WWE 2K titles offer simulation-style wrestling, while arcade spinoffs add exaggerated moves and over-the-top action. The games allow players to recreate classic matches, build their own wrestlers, and compete online.",
+    genre: "Sports",
+    platform: [1, 1, 1],
+    comments: [
+      ["Character customization is deep."],
+      ["Story modes can be hit or miss."],
+      ["Online play has some issues."],
+      ["Animations have improved over the years."],
+      ["Feels like watching real WWE matches."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+  {
+    _id: {
+      $oid: "67c84cbb6662df5250fe6b1b",
+    },
+    name: "NBA",
+    description:
+      "NBA games, particularly the NBA 2K series, are the leading basketball simulation titles. They feature realistic gameplay, player likenesses, and immersive modes like MyCareer, MyTeam, and online multiplayer. The series is known for its deep mechanics, dynamic storytelling, and competitive esports scene.",
+    genre: "SPorts",
+    platform: [1, 1, 1],
+    comments: [
+      ["MyCareer mode is super immersive."],
+      ["Gameplay mechanics are solid."],
+      ["Graphics improve every year."],
+      ["Needs better online matchmaking."],
+      ["Microtransactions can be frustrating."],
+    ],
+    rating: {
+      count: 60,
+      sum: 300,
+    },
+  },
+];
+localStorage.setItem('data',JSON.stringify(data));
+
+
+let news = [
+  {
+    "name": "Apex Legends",
+    "heading": "Apex Legends Announces Cross-Play and Expansion to New Platforms",
+    "content": "Respawn Entertainment has announced that Apex Legends will support cross-play across Xbox One, PlayStation 4, Nintendo Switch, and PC platforms. Additionally, the game is set to launch on Steam and Nintendo Switch this fall, allowing players on these platforms to join the Apex Games. The upcoming Lost Treasures Collection Event will introduce a new limited-time mode, a town takeover, and Mirage's heirloom item."
+  },
+  {
+    "name": "Fortnite",
+    "heading": "PlayStation Tournaments: XP to Feature Fortnite in Live Esports Event",
+    "content": "Sony is enhancing its PlayStation esports efforts with a new series of live tournaments called PlayStation Tournaments: XP. The inaugural event will occur on January 18th, 2025, in London, featuring games such as Tekken 8, EA Sports FC 25, Fortnite, and Astro Bot. Players worldwide will compete representing teams named Triangle, Circle, Cross, and Square to earn points and battle for the championship and exclusive prizes. Open qualifiers for Fortnite begin on December 6th. The event will be live-streamed on PlayStation's Twitch and YouTube channels."
+  },
+  {
+    "name": "Forza",
+    "heading": "Forza Horizon 5 Set to Launch on PlayStation Platforms",
+    "content": "In a strategic move to broaden its gaming ecosystem, Microsoft has announced that Forza Horizon 5 will be available on PlayStation consoles starting this spring. This decision reflects Microsoft's shift towards emphasizing software accessibility over hardware exclusivity. The PlayStation version will support full cross-play, enabling seamless online interactions between PlayStation and Xbox players. While a specific release date hasn't been confirmed, the anticipated launch is slated for the upcoming spring season."
+  },
+  {
+    "name": "EA FC",
+    "heading": "EA SPORTS FC Introduces Innovative 4v4 Mode 'Rush' Amidst Rebranding Efforts",
+    "content": "Following its rebranding to EA SPORTS FC, the franchise has unveiled a new 4v4 mode called 'Rush,' which has garnered significant attention with nearly 300 million matches played. The rebranding has granted the development team greater creative freedom, leading to partnerships with over 30 leagues and federations, including LaLiga. James Salmon, Senior Director of Marketing, highlighted that fans have responded positively, with a record 8.2 billion hours played in the first year. The team remains committed to authenticity, innovation, and community engagement, introducing features like FC IQ and initiatives such as FC FUTURES."
+  },
+  {
+    "name": "Assassins Creed",
+    "heading": "Assassin's Creed Shadows Faces Multiple Delays Amidst Ubisoft's Strategic Reevaluation",
+    "content": "Assassin's Creed Shadows, initially scheduled for release on November 12, 2024, has experienced several delays, with the latest postponement pushing the launch to March 20, 2025. Ubisoft cites the need to enhance the day-one experience and maximize launch profits as reasons for the delay. The company is also navigating financial challenges stemming from less successful ventures into NFT and AI-based games. Amidst these challenges, there is speculation about potential acquisitions or restructuring, with companies like Tencent mentioned as possible stakeholders. Additionally, Ubisoft is developing Assassin's Creed Invictus, a multiplayer game inspired by Fall Guys, featuring 16 players competing in various mini-games, including team battles and races."
+  }
+]
+localStorage.setItem('news',JSON.stringify(news)); 
