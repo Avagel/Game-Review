@@ -24,7 +24,7 @@ import { GameCardLoad } from "../components/GameCardLoad";
 import { BrowseFilter } from "../components/BrowseFilter";
 
 export const Browse = ({ games: _games, filter, setFilter }) => {
-  const rawgApiKey = import.meta.env.VITE_RAWG_API_KEY;
+  const rawgApiKey = import.meta.env.RAWG_API_KEY;
   const [games, setGames] = useState(_games);
   const { pagenum } = useParams();
   const location = useLocation();

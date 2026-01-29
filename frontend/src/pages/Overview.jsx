@@ -13,7 +13,7 @@ import Loader from "../components/Loader";
 import sadtear from "../assets/sadtear.svg";
 
 export const Overview = () => {
-  const rawgApiKey = import.meta.env.VITE_RAWG_API_KEY;
+  const rawgApiKey = import.meta.env.RAWG_API_KEY;
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [gameData, setGameData] = useState(null);
   const [loading, setLoading] = useState(true);

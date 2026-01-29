@@ -8,7 +8,7 @@ import sadtear from "../assets/sadtear.svg";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export const Search = () => {
-  const rawgApiKey = import.meta.env.VITE_RAWG_API_KEY;
+  const rawgApiKey = import.meta.env.RAWG_API_KEY;
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
