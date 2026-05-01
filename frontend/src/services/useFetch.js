@@ -5,6 +5,7 @@ export const useFetch = (func) => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
+
   const fetchData = async () => {
     console.log("Fetching data...");
     try {

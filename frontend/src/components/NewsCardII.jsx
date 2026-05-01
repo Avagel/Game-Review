@@ -16,7 +16,7 @@ export const NewsCardII = ({ article }) => {
       <img
         src={image || urlToImage}
         alt=""
-        className="h-1/2 lg:w-full object-cover rounded-xl"
+        className="h-1/2 w-full object-cover rounded-xl"
       />
       <div className=" p-6 ">
         <p className="text-xl  mb-4  text-white tracking-wide ">

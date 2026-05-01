@@ -27,7 +27,7 @@ import { fetchGames, fetchNews } from "./services/api";
 
 function App() {
   const gNewsApiKey = import.meta.env.GNEWS_API_KEY;
-  const rawgApiKey = import.meta.env.RAWG_API_KEY;
+  const rawgApiKey = import.meta.env.VITE_RAWG_API_KEY;
   const {
     data: games,
     loading: gamesLoading,

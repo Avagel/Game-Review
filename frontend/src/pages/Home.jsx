@@ -19,6 +19,8 @@ import CarouselItem from "../components/CarouselItem";
 export const Home = ({ games, gamesLoading, error, news, newsLoading }) => {
   const navigate = useNavigate();
 
+  console.log(news);
+
   // const [error, setError] = useState(null);
   const [index, setIndex] = useState(0);
   const images = games?.slice(0, 6)?.map((item) => {
@@ -61,7 +63,7 @@ export const Home = ({ games, gamesLoading, error, news, newsLoading }) => {
     <Loader />
   ) : (
     <div className="h-screen  flex flex-col items-center  tracking-wider overflow-x-hidden  overflow-auto [scrollbar-width:none] [-webkit-scrollbar:display:none] px-2 relative pb-30 z-4 ">
-      <div className="h-fi lg:hidden w-full my-16 pt-30 pb-10  lg:flex-col items-center gap-5 lg:pb-0 lg:w-[1000px]">
+      <div className="text-center flex lg:hidden w-full my-16 pt-30 pb-10  flex-col items-center gap-5 lg:pb-0 lg:w-[1000px]">
         <p className="text-white/80 text-center text-5xl w-fit tracking-widest">
           Play, <br /> Review, <br />
           Repeat.
@@ -102,7 +104,7 @@ export const Home = ({ games, gamesLoading, error, news, newsLoading }) => {
       </div>
 
       {/*-------------Popular Genres--------------*/}
-      <div className="h-fit relative w-full px-30 lg:px-0  my-16 rounded-md  lg:flex lg:items-center lg:flex-col   lg:w-[1000px]">
+      <div className="h-fit relative w-full px-3 lg:px-0  my-16 rounded-md  lg:flex lg:items-center lg:flex-col   lg:w-[1000px]">
         <p className="text-xl lg:text-xl text-white text-center mb-1">
           Popular Genres
         </p>
@@ -219,7 +221,7 @@ export const Home = ({ games, gamesLoading, error, news, newsLoading }) => {
         </div>
       </div>
 
-      <div className="relative my-16  lg:w-[1000px]">
+      <div className="relative my-16 lg:w-[1000px] w-full px-3">
         <p className="text-xl lg:text-xl text-white text-center mb-1">
           Game Quiz
         </p>
@@ -264,12 +266,12 @@ export const Home = ({ games, gamesLoading, error, news, newsLoading }) => {
           <div className="flex flex-col px-3 gap-3 mb-5 lg:grid lg:grid-cols-3 md:grid md:grid-cols-2  ">
             {newsLoading
               ? "loading articles..."
-              : news.slice(0, 3).map((article, index) => {
+              : news?.slice(0, 3).map((article, index) => {
                   return <NewsCardII article={article} />;
                 })}
           </div>
 
-          <div className="flex justify-center h-fit items-center w-full ">
+          {/* <div className="flex justify-center h-fit items-center w-full ">
             <button
               className="text-xs px-5 rounded-full text-white py-2.5 border border-orange-500 mt-4 tracking-widest "
               onClick={() => {
@@ -279,7 +281,7 @@ export const Home = ({ games, gamesLoading, error, news, newsLoading }) => {
               {" "}
               See More
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       {/*---------------Random Games---------------------*/}

@@ -7,7 +7,7 @@ export const Layout = () => {
   return (
     <>
       <div
-        className="  w-full relative bg-cover bg-center bg-zinc-950 min-h-[100dvh] pb-[env(safe-area-inset-bottom)] overflow-hidden page"
+        className="  w-full relative bg-cover bg-center bg-zinc-950 layout min-h-[100dvh] pb-[env(safe-area-inset-bottom)] overflow-hidden page"
         style={{
           // backgroundImage: `url(${first})`,
           backgroundPosition: "center",
